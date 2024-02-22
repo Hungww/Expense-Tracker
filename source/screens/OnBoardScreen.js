@@ -17,19 +17,19 @@ const data = [
   {
     title: 'Intelligent\nmanagement',
     text: 'Easily manage your personal expenses.',
-    image: require('../assets/piggy.json'),
+    image: require('../../assets/piggy.json'),
     bg: 'white',
   },
   {
     title: 'Powerful AI',
     text: 'Effectively optimize your daily\n expense with our powerful AI',
-    image: require('../assets/robot.json'),
+    image: require('../../assets/robot.json'),
     bg: 'white',
   },
   {
     title: 'Large community',
     text: "Be part of our community\nShare your experiences and idea with others",
-    image:require('../assets/comm.json'),
+    image:require('../../assets/comm.json'),
     bg: 'white',
   },
 ];

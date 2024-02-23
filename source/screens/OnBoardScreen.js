@@ -17,7 +17,7 @@ const data = [
   {
     title: 'Intelligent\nmanagement',
     text: 'Easily manage your personal expenses.',
-    image: require('../../assets/piggy.json'),
+    image: require('../../assets/test.json'),
     bg: 'white',
   },
   {
@@ -66,7 +66,7 @@ export default function OnBoardScreen() {
       <View
 className="flex-1 items-center bg-blue pt-20">
         {/* <Image source={item.image} style={styles.image} /> */}
-        <LottieView style={{width: 310, height: 310}} source={item.image} autoPlay loop />
+        <LottieView style={{width: 310, height: 310}} source={item.image} autoPlay loop renderMode="SOFTWARE" />
         <Text className="text-onboard_title_color text-center text-4xl font-bold mb-1">{item.title}</Text>
         <Text className=" text-onboard_description_color text-center text-base">{item.text}</Text>
       </View>

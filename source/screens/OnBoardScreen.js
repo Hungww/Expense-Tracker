@@ -64,7 +64,7 @@ export default function OnBoardScreen() {
   _renderItem = ({item}) => {
     return (
       <View
-className="flex-1 items-center bg-blue pt-20">
+className="flex-1 items-center bg-white pt-20">
         {/* <Image source={item.image} style={styles.image} /> */}
         <LottieView style={{width: 310, height: 310}} source={item.image} autoPlay loop renderMode="SOFTWARE" />
         <Text className="text-onboard_title_color text-center text-4xl font-bold mb-1">{item.title}</Text>

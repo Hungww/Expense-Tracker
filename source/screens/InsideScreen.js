@@ -2,7 +2,7 @@ import * as React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useState } from "react";
 import { db, auth } from '../utils/firebasecfg';
-
+import { getAuth, createUserWithEmailAndPassword,onAuthStateChanged  } from "firebase/auth";
 
 //Importing the screens
 import HomeScreen from './HomeScreen';

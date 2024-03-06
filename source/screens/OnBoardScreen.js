@@ -11,6 +11,8 @@ import {
 import AppIntroSlider from 'react-native-app-intro-slider';
 import { Animated, Easing } from 'react-native';
 import LottieView from 'lottie-react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
 const data = [
@@ -58,7 +60,7 @@ const styles = StyleSheet.create({
 
 });
 
-export default function OnBoardScreen() {
+export default function OnBoardScreen({ navigation }) {
   slider = undefined;
 
   _renderItem = ({item}) => {
@@ -99,6 +101,7 @@ className="flex-1 items-center bg-white pt-20">
             <TouchableOpacity
               className="flex-1 items-center py-5 rounded-2xl bg-primary my-1"
               style={[ {width: '96%'}]}
+              onPress={() => navigation.replace('Inside')}
               >
                 <Text className=" text-FCFCFC font-bold text-center">Sign Up</Text>
             </TouchableOpacity>

@@ -19,9 +19,11 @@ export default function App() {
       
       }}
       >
-
-        <Stack.Screen name="OnBoard" component={OnBoardScreen}  />
+        
         <Stack.Screen name="Home" component={HomeScreen}  />
+        <Stack.Screen name="OnBoard" component={OnBoardScreen}  />
+        
+        
       </Stack.Navigator>
     </NavigationContainer>
   );

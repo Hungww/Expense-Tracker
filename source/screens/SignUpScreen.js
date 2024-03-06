@@ -1,11 +1,9 @@
 import * as React from 'react';
 import { View, Text, Button, TextInput } from 'react-native';
-import { collection, addDoc } from "firebase/firestore"; 
-import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useState } from "react";
 import { db, auth } from '../utils/firebasecfg';
-import { getAuth, createUserWithEmailAndPassword,onAuthStateChanged  } from "firebase/auth";
+
 
 
 

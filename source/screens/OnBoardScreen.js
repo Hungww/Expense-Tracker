@@ -9,10 +9,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
-import { Animated, Easing } from 'react-native';
 import LottieView from 'lottie-react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 
 
 const data = [

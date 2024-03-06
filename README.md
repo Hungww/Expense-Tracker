@@ -1,30 +1,21 @@
-# Foobar
+# ExpenseTracker App
 
-Foobar is a Python library for dealing with word pluralization.
+ExpenseTracker, exactly as it name, an expense tracker app  for dealing with your budget management process.
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+Use the package manager [npm](https://www.npmjs.com/) to install all dependencies.
 
 ```bash
-pip install foobar
+npm install
 ```
 
 ## Usage
-
-```python
-import foobar
-
-# returns 'words'
-foobar.pluralize('word')
-
-# returns 'geese'
-foobar.pluralize('goose')
-
-# returns 'phenomenon'
-foobar.singularize('phenomena')
+Just run the command:
+```bash
+npx expo start
 ```
-
+Then install the Expo Go app on your iOS or Android phone and connect to the same wireless network as your computer. On Android, use the Expo Go app to scan the QR code from your terminal to open your project. On iOS, use the built-in QR code scanner of the default iOS Camera app.
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first

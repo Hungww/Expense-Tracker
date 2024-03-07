@@ -67,8 +67,8 @@ export default function OnBoardScreen({ navigation }) {
 className="flex-1 items-center bg-white pt-20">
         {/* <Image source={item.image} style={styles.image} /> */}
         <LottieView style={{width: 310, height: 310}} source={item.image} autoPlay loop renderMode="SOFTWARE" />
-        <Text className="text-onboard_title_color text-center text-4xl font-bold mb-1">{item.title}</Text>
-        <Text className=" text-onboard_description_color text-center text-base">{item.text}</Text>
+        <Text className="text-onboard_title_color text-center text-4xl font-roboto-black mb-1">{item.title}</Text>
+        <Text className=" text-onboard_description_color text-center text-base font-roboto-medium ">{item.text}</Text>
       </View>
     );
   };

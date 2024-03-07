@@ -17,18 +17,18 @@ export default function SignUpScreen() {
   
 
     return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Sign up</Text>
+    <View className=' flex-1 items-center justify-center' >
+      <Text className=" font-roboto">Sign up</Text>
       
       <TextInput
-        style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+        
         onChangeText={text => setEmail(text)}
         value={email}
         placeholder="Email"
         className="w-96 h-12 bg-white rounded-2xl px-5 mx-2 my-5"
         />
       <TextInput
-        style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+        
         onChangeText={text => setPassword(text)}
         value={password}
         secureTextEntry={true}

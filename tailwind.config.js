@@ -11,6 +11,23 @@ module.exports = {
         'FCFCFC': '#FCFCFC',
         '7F3DFF': '#7F3DFF',
       },
+      fontFamily: {
+        'roboto': ['Roboto', 'sans-serif'],
+        'roboto-bold': ['Roboto-Bold', 'sans-serif'],
+        'roboto-italic': ['Roboto-Italic', 'sans-serif'],
+        'roboto-bolditalic': ['Roboto-BoldItalic', 'sans-serif'],
+        'roboto-light': ['Roboto-Light', 'sans-serif'],
+        'roboto-lightitalic': ['Roboto-LightItalic', 'sans-serif'],
+        'roboto-thin': ['Roboto-Thin', 'sans-serif'],
+        'roboto-thinitalic': ['Roboto-ThinItalic', 'sans-serif'],
+        'roboto-medium': ['Roboto-Medium', 'sans-serif'],
+        'roboto-mediumitalic': ['Roboto-MediumItalic', 'sans-serif'],
+        'roboto-black': ['Roboto-Black', 'sans-serif'],
+        'roboto-blackitalic': ['Roboto-BlackItalic', 'sans-serif'],
+
+
+        
+      },
 
 
 

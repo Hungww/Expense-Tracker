@@ -46,8 +46,8 @@ export default function SignUpScreen() {
     async function loginWithEmailPassword() {
       console.log("AAAAAAAAAAAAAAAAAAAAAAAA")
       //genarate random email and password
-      const sign_email = "luuchanhung123456@gmail.com"
-      const sign_password = "123456";
+      const sign_email = email;
+      const sign_password = password;
       createUserWithEmailAndPassword(auth, sign_email, sign_password)
       .then((userCredential) => {
         // Signed up 

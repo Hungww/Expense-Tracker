@@ -7,6 +7,7 @@ import { getAuth, createUserWithEmailAndPassword,onAuthStateChanged  } from "fir
 //Importing the screens
 import HomeScreen from './HomeScreen';
 import SignUpScreen from './SignUpScreen';
+import AIScreen from './AIScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -35,7 +36,8 @@ export default function InsideScreen() {
     }}>
  
       {user_uid ? (
-        <Stack.Screen name="Home" component={HomeScreen} />
+        //<Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="AI" component={AIScreen} />
       ) : (
         <Stack.Screen name="SignUp" component={SignUpScreen} />
       )}

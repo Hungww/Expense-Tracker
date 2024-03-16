@@ -36,15 +36,14 @@ export default function SignUpScreen() {
         placeholder="Password"
         className="w-96 h-12 bg-white rounded-2xl px-5 mx-2 my-5"
         />
-      <Button title="Sign up" onPress={loginWithEmailPassword} />
+      <Button title="Sign up" onPress={SignUpWithEmailPassword} />
     </View>
     );
 
 
 
 
-    async function loginWithEmailPassword() {
-      console.log("AAAAAAAAAAAAAAAAAAAAAAAA")
+    async function SignUpWithEmailPassword() {
       //genarate random email and password
       const sign_email = email;
       const sign_password = password;

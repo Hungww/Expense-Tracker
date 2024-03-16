@@ -21,7 +21,11 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.anonymous.ExpenseTracker"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -36,6 +40,11 @@
           "microphonePermission": "Set this microphonePermission notification message in app.json"
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "3cc880e7-5707-4fbe-8c55-30cf576c1064"
+      }
+    }
   }
 }

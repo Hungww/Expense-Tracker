@@ -5,14 +5,28 @@ import { db, auth } from '../utils/firebasecfg';
 import { getAuth, createUserWithEmailAndPassword,onAuthStateChanged  } from "firebase/auth";
 
 //Importing the screens
-import HomeScreen from './HomeScreen';
+import Main from './Main';
 import SignUpScreen from './SignUpScreen';
+import LoginScreen from './LoginScreen';
 import AIScreen from './AIScreen';
+
 
 
 const Stack = createNativeStackNavigator();
 
-export default function InsideScreen() {
+export default function InsideScreen({  route ,navigation }) {
+
+  const ScreenName = route.params.screen;
+  var ScreenComponent = null;
+  if (ScreenName == "SignUp") {
+    ScreenComponent = SignUpScreen;
+  }
+  else {
+    ScreenComponent = LoginScreen;
+  }
+
+
+
   const [user_uid, setUser_uid] = useState("");
   onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -36,10 +50,13 @@ export default function InsideScreen() {
     }}>
  
       {user_uid ? (
-        //<Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="AI" component={AIScreen} />
+        <Stack.Screen name="Main" component={Main} />
+        
       ) : (
-        <Stack.Screen name="SignUp" component={SignUpScreen} />
+        
+
+        <Stack.Screen name={ScreenName} component={ScreenComponent} />
+
       )}
 
       

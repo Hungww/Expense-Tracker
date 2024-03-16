@@ -1,19 +1,12 @@
-import * as React from 'react';
-import { View, Text, Button } from 'react-native';
-import { db, auth } from '../utils/firebasecfg';
+import React from 'react';
+import { View, Text } from 'react-native';
 
-export default function HomeScreen() {
-  async function  logOut() {
-    await auth.signOut();
-  
-    // ...
-  
-  }
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button title="Add Data" onPress={logOut} />
-    </View>
-  );
+const HomeScreen = () => {
+    return (
+        <View>
+            <Text>Hello, World!</Text>
+        </View>
+    );
+};
 
-}
+export default HomeScreen;

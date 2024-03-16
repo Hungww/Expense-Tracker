@@ -99,7 +99,7 @@ className="flex-1 items-center bg-white pt-20">
             <TouchableOpacity
               className="flex-1 items-center py-5 rounded-2xl bg-primary my-1"
               style={[ {width: '96%'}]}
-              onPress={() => navigation.replace('Inside')}
+              onPress={() => navigation.replace('Inside', {screen: 'SignUp'})}
               >
                 <Text className=" text-FCFCFC font-bold text-center">Sign Up</Text>
             </TouchableOpacity>
@@ -107,6 +107,7 @@ className="flex-1 items-center bg-white pt-20">
             <TouchableOpacity 
               className="flex-1 items-center py-5 rounded-2xl bg-third w-11/12 my-1"
               style={[ {width: '96%'}]}
+              onPress={() => navigation.replace('Inside', {screen: 'Login'})}
             >
               <Text className=" text-7F3DFF font-bold text-center">Login</Text>
             </TouchableOpacity>

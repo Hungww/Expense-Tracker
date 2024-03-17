@@ -78,7 +78,7 @@ export default function SignUpScreen() {
 
       <View className=' items-center justify-center'>
         <View style={styles.input_container}>
-          <Text className=" font-roboto color-[#6F6F6F] text-[18px]  mb-1">Name</Text>
+          <Text className=" font-roboto color-[#6F6F6F] text-[16px]  mb-1">Name</Text>
           <View className='flex-row items-center justify-center border-2 border-gray-200 bg-white pr-2 rounded-xl w-80'>
             <TextInput
               onChange={text => handleName(text)}
@@ -99,7 +99,7 @@ export default function SignUpScreen() {
         </View>
         
         <View style={styles.input_container}>
-          <Text className=" font-roboto color-[#6F6F6F] text-[18px]   mb-1">Email</Text>
+          <Text className=" font-roboto color-[#6F6F6F] text-[16px]   mb-1">Email</Text>
           <View className='flex-row items-center justify-center border-2 border-gray-200 bg-white pr-2 rounded-xl w-80'>
             <TextInput
               onChange={text => handleEmail(text)}
@@ -120,7 +120,7 @@ export default function SignUpScreen() {
         </View>
 
         <View style={styles.input_container}>
-          <Text className=" font-roboto color-[#6F6F6F] text-[18px]  mb-1">Password</Text>
+          <Text className=" font-roboto color-[#6F6F6F] text-[16px]  mb-1">Password</Text>
           <View className='flex-row items-center justify-center border-2 border-gray-200 bg-white pr-2 rounded-xl w-80'>
             <TextInput
               onChange={text => handlePassword(text)}
@@ -141,7 +141,7 @@ export default function SignUpScreen() {
         </View>
 
         <View style={styles.input_container}>
-          <Text className=" font-roboto color-[#6F6F6F] text-[18px]  mb-1">Confirm password</Text>
+          <Text className=" font-roboto color-[#6F6F6F] text-[16px]  mb-1">Confirm password</Text>
           <View className='flex-row items-center justify-center border-2 border-gray-200 bg-white pr-2 rounded-xl w-80'>
             <TextInput
               onChange={text => handleRePassword(text)}
@@ -220,8 +220,8 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 16,
     paddingHorizontal: 20,
-    //marginHorizontal: 8,
-    marginVertical: 4,
+    //marginHorizontal: 2,
+    marginVertical: 3,
   },
   input_container: {
     width: '90%',

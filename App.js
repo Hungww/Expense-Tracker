@@ -16,6 +16,7 @@ import {
 import OnBoardScreen from './source/screens/OnBoardScreen';
 import InsideScreen from './source/screens/InsideScreen';
 import SplashScreen from './source/screens/SplashScreen';
+import SignUpScreen from './source/screens/SignUpScreen';
 
 import {useFonts} from 'expo-font';
 const Stack = createNativeStackNavigator();
@@ -51,7 +52,7 @@ export default function App() {
       >
         
         
-        <Stack.Screen name="OnBoard" component={OnBoardScreen}  />
+        <Stack.Screen name="OnBoard" component={SignUpScreen}  />
         <Stack.Screen name="Inside" component={InsideScreen}  />
         
         

@@ -3,7 +3,7 @@ import { View, Text, Button, TextInput,SafeAreaView, StyleSheet, KeyboardAvoidin
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Checkbox from 'expo-checkbox';
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 import { useState } from "react";
 import { db, auth } from '../utils/firebasecfg';
@@ -74,12 +74,12 @@ export default function SignUpScreen() {
       behavior={Platform.OS === 'ios'? 'padding': 'height'}
       className='flex-1 items-center justify-center' 
     >
-      <Text className="font-roboto font-semibold text-3xl mb-4">Create your account</Text>
+      <Text className=" font-roboto-bold text-[36px] mb-4 mt-5">Create your account</Text>
 
-      <View className='w-full items-center'>
+      <View className=' items-center justify-center'>
         <View style={styles.input_container}>
-          <Text className="font-roboto text-base">Name</Text>
-          <View className='flex-row items-center justify-center border-2 border-white bg-white pr-2 rounded-3xl'>
+          <Text className=" font-roboto color-[#6F6F6F] text-[18px]  mb-1">Name</Text>
+          <View className='flex-row items-center justify-center border-2 border-gray-200 bg-white pr-2 rounded-xl w-80'>
             <TextInput
               onChange={text => handleName(text)}
               value={name}
@@ -99,8 +99,8 @@ export default function SignUpScreen() {
         </View>
         
         <View style={styles.input_container}>
-          <Text className="font-roboto text-base">Email</Text>
-          <View className='flex-row items-center justify-center border-2 border-white bg-white pr-2 rounded-3xl'>
+          <Text className=" font-roboto color-[#6F6F6F] text-[18px]   mb-1">Email</Text>
+          <View className='flex-row items-center justify-center border-2 border-gray-200 bg-white pr-2 rounded-xl w-80'>
             <TextInput
               onChange={text => handleEmail(text)}
               value={email}
@@ -120,8 +120,8 @@ export default function SignUpScreen() {
         </View>
 
         <View style={styles.input_container}>
-          <Text className="font-roboto text-base">Password</Text>
-          <View className='flex-row items-center justify-center border-2 border-white bg-white pr-2 rounded-3xl'>
+          <Text className=" font-roboto color-[#6F6F6F] text-[18px]  mb-1">Password</Text>
+          <View className='flex-row items-center justify-center border-2 border-gray-200 bg-white pr-2 rounded-xl w-80'>
             <TextInput
               onChange={text => handlePassword(text)}
               value={password}
@@ -141,8 +141,8 @@ export default function SignUpScreen() {
         </View>
 
         <View style={styles.input_container}>
-          <Text className="font-roboto text-base">Confirm password</Text>
-          <View className='flex-row items-center justify-center border-2 border-white bg-white pr-2 rounded-3xl'>
+          <Text className=" font-roboto color-[#6F6F6F] text-[18px]  mb-1">Confirm password</Text>
+          <View className='flex-row items-center justify-center border-2 border-gray-200 bg-white pr-2 rounded-xl w-80'>
             <TextInput
               onChange={text => handleRePassword(text)}
               value={re_password}
@@ -161,7 +161,7 @@ export default function SignUpScreen() {
             <Text className='text-red-500 mt-1'>Password does not match.</Text>)}
         </View>
 
-        <View className='items-center justify-center flex-row mt-6 mb-4 mr-5 mx-4'>
+        <View className='items-center justify-center flex-row mt-6 mb-4 mr-5 mx-10'>
           <Checkbox 
             className='border-2 border-[#7F3DFF] rounded-md w-6 h-6 mr-2'
             value={isSelected} 
@@ -176,7 +176,7 @@ export default function SignUpScreen() {
 
         <TouchableOpacity 
           onPress={loginWithEmailPassword} 
-          className='bg-[#7F3DFF] w-[90%] h-14 items-center justify-center rounded-2xl'
+          className='bg-[#7F3DFF]  h-14 items-center justify-center rounded-2xl w-96 mt-4'
         >
           <Text className='color-[#fcfcfc] font-roboto font-semibold text-lg'>Sign Up</Text>
         </TouchableOpacity>
@@ -184,7 +184,7 @@ export default function SignUpScreen() {
         <View className='items-center flex-row mt-2'>
           <Text className='text-base font-roboto color-[#91919f]'>Already have an account?</Text>
           <TouchableOpacity onPress={() => {}}>
-            <Text className='text-base font-roboto color-[#7F3DFF]'> LogIn</Text>
+            <Text className='text-base font-roboto color-[#7F3DFF]'> Login</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -200,6 +200,7 @@ export default function SignUpScreen() {
       // Signed up 
       const user = userCredential.user;
       console.log("User signed up successfully")
+      
       
       // ...
     })

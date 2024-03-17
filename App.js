@@ -52,7 +52,7 @@ export default function App() {
       >
         
         
-        <Stack.Screen name="OnBoard" component={SignUpScreen}  />
+        <Stack.Screen name="OnBoard" component={OnBoardScreen}  />
         <Stack.Screen name="Inside" component={InsideScreen}  />
         
         

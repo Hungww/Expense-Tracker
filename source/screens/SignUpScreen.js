@@ -1,7 +1,10 @@
 import * as React from 'react';
 import { View, Text, Button, TextInput,SafeAreaView, StyleSheet, KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 import Checkbox from 'expo-checkbox';
+import { createUserWithEmailAndPassword } from "firebase/auth";
+
 import { useState } from "react";
 import { db, auth } from '../utils/firebasecfg';
 import Feather from 'react-native-vector-icons/Feather';
@@ -32,6 +35,7 @@ export default function SignUpScreen() {
     }
   }
 
+
   function handleEmail(e) {
     const emailVal = e.nativeEvent.text;
     setEmail(emailVal);
@@ -60,6 +64,8 @@ export default function SignUpScreen() {
     if(rePasswordVal === password) {
       setRePasswordVerified(true);
       setRePassword(rePasswordVal);
+
+
     }
   }
 

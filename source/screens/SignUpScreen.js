@@ -199,6 +199,8 @@ export default function SignUpScreen() {
     .then((userCredential) => {
       // Signed up 
       const user = userCredential.user;
+      console.log("User signed up successfully")
+      
       // ...
     })
     .catch((error) => {
@@ -225,4 +227,3 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   }
 });
-

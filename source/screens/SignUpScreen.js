@@ -13,6 +13,7 @@ import Error from 'react-native-vector-icons/MaterialIcons';
 
 const Stack = createNativeStackNavigator();
 export default function SignUpScreen() {
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -25,7 +26,7 @@ export default function SignUpScreen() {
   const [rePasswordVerified, setRePasswordVerified] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
   const [showRePassword, setShowRePassword] = useState(true);
-
+  const [borderColor, setBorderColor] = useState('border-gray-200');
   function handleName(e) {
     const nameVar = e.nativeEvent.text;
     setName(nameVar);
@@ -79,12 +80,15 @@ export default function SignUpScreen() {
       <View className=' items-center justify-center'>
         <View style={styles.input_container}>
           <Text className=" font-roboto color-[#6F6F6F] text-[16px]  mb-1">Name</Text>
-          <View className='flex-row items-center justify-center border-2 border-gray-200 bg-white pr-2 rounded-xl w-80'>
+          <View className = {'flex-row items-center justify-center w-80  bg-white pr-2 rounded-xl border-2 ' + borderColor} >
             <TextInput
               onChange={text => handleName(text)}
               value={name}
               placeholder="ex: John Doe..."
               style={styles.input}
+              
+              onFocus={() => setBorderColor('border-[#7F3DFF]')}
+              onBlur={() => setBorderColor('border-gray-200')}
             />
             {name.length <1 ? null:  (nameVerified ?
               <Feather name='check-circle' color='green' size={20}/>
@@ -137,7 +141,7 @@ export default function SignUpScreen() {
             </TouchableOpacity>
           </View>
           {password.length <1 ? null:  (passwordVerified ? null : 
-            <Text className='text-red-500 mt-1'>Password must contain at least 6 characters, including at least 1 letter and 1 number</Text>)}
+            <Text className='text-red-500 mt-1'> Password must contain at least 6 characters, {"\n"} including at least 1 letter and 1 number</Text>)}
         </View>
 
         <View style={styles.input_container}>
@@ -176,7 +180,7 @@ export default function SignUpScreen() {
 
         <TouchableOpacity 
           onPress={loginWithEmailPassword} 
-          className='bg-[#7F3DFF]  h-14 items-center justify-center rounded-2xl w-96 mt-4'
+          className='bg-[#7F3DFF]  h-14 items-center justify-center rounded-2xl w-80 mt-4'
         >
           <Text className='color-[#fcfcfc] font-roboto font-semibold text-lg'>Sign Up</Text>
         </TouchableOpacity>

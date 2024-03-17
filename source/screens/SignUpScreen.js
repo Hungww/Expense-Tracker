@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, Text, Button, TextInput,SafeAreaView, StyleSheet, KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Checkbox from 'expo-checkbox';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
@@ -71,128 +71,130 @@ export default function SignUpScreen() {
   }
 
     return (
-    <KeyboardAvoidingView 
-      behavior={Platform.OS === 'ios'? 'padding': 'height'}
-      className='flex-1 items-center justify-center' 
+    <KeyboardAwareScrollView
     >
+      <View className='flex-1 items-center justify-center mt-10' >
       <Text className=" font-roboto-bold text-[36px] mb-4 mt-5">Create your account</Text>
 
-      <View className=' items-center justify-center'>
-        <View style={styles.input_container}>
-          <Text className=" font-roboto color-[#6F6F6F] text-[16px]  mb-1">Name</Text>
-          <View className = {'flex-row items-center justify-center w-80  bg-white pr-2 rounded-xl border-2 ' + borderColor} >
-            <TextInput
-              onChange={text => handleName(text)}
-              value={name}
-              placeholder="ex: John Doe..."
-              style={styles.input}
-              
-              onFocus={() => setBorderColor('border-[#7F3DFF]')}
-              onBlur={() => setBorderColor('border-gray-200')}
-            />
-            {name.length <1 ? null:  (nameVerified ?
-              <Feather name='check-circle' color='green' size={20}/>
-              :<Error name='error' color='red' size={20} />) }
-          </View>
-          {
-            name.length<1?null: (
-              nameVerified ? null: 
-              <Text className='text-red-500 mt-1'>Name must contain at least 2 characters</Text>
-            )
-          }
-        </View>
+<View className=' items-center justify-center'>
+  <View style={styles.input_container}>
+    <Text className=" font-roboto color-[#6F6F6F] text-[16px]  mb-1">Name</Text>
+    <View className = {'flex-row items-center justify-center w-80  bg-white pr-2 rounded-xl border-2 ' + borderColor} >
+      <TextInput
+        onChange={text => handleName(text)}
+        value={name}
+        placeholder="ex: John Doe..."
+        style={styles.input}
         
-        <View style={styles.input_container}>
-          <Text className=" font-roboto color-[#6F6F6F] text-[16px]   mb-1">Email</Text>
-          <View className='flex-row items-center justify-center border-2 border-gray-200 bg-white pr-2 rounded-xl w-80'>
-            <TextInput
-              onChange={text => handleEmail(text)}
-              value={email}
-              placeholder="ex: email@example.com"
-              style={styles.input}
-            />
-            {email.length <1 ? null:  (emailVerified ?
-                <Feather name='check-circle' color='green' size={20}/>
-                :<Error name='error' color='red' size={20} />) }
-          </View>
-          {
-            email.length<1?null: (
-              emailVerified ? null: 
-              <Text className='text-red-500 mt-1'>Enter proper email address</Text>
-            )
-          }
-        </View>
+        onFocus={() => setBorderColor('border-[#7F3DFF]')}
+        onBlur={() => setBorderColor('border-gray-200')}
+      />
+      {name.length <1 ? null:  (nameVerified ?
+        <Feather name='check-circle' color='green' size={20}/>
+        :<Error name='error' color='red' size={20} />) }
+    </View>
+    {
+      name.length<1?null: (
+        nameVerified ? null: 
+        <Text className='text-red-500 mt-1'>Name must contain at least 2 characters</Text>
+      )
+    }
+  </View>
+  
+  <View style={styles.input_container}>
+    <Text className=" font-roboto color-[#6F6F6F] text-[16px]   mb-1">Email</Text>
+    <View className='flex-row items-center justify-center border-2 border-gray-200 bg-white pr-2 rounded-xl w-80'>
+      <TextInput
+        onChange={text => handleEmail(text)}
+        value={email}
+        placeholder="ex: email@example.com"
+        style={styles.input}
+      />
+      {email.length <1 ? null:  (emailVerified ?
+          <Feather name='check-circle' color='green' size={20}/>
+          :<Error name='error' color='red' size={20} />) }
+    </View>
+    {
+      email.length<1?null: (
+        emailVerified ? null: 
+        <Text className='text-red-500 mt-1'>Enter proper email address</Text>
+      )
+    }
+  </View>
 
-        <View style={styles.input_container}>
-          <Text className=" font-roboto color-[#6F6F6F] text-[16px]  mb-1">Password</Text>
-          <View className='flex-row items-center justify-center border-2 border-gray-200 bg-white pr-2 rounded-xl w-80'>
-            <TextInput
-              onChange={text => handlePassword(text)}
-              value={password}
-              secureTextEntry={showPassword}
-              placeholder="Your password here..."
-              style={styles.input}
-            />
-            <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-              {password.length <1 ? null:  (showPassword ?
-                <Feather name='eye' size={18} color={passwordVerified? 'green': 'red'}/>
-                :<Feather name='eye-off' size={18} color={passwordVerified? 'green': 'red'}/>)
-              }
-            </TouchableOpacity>
-          </View>
-          {password.length <1 ? null:  (passwordVerified ? null : 
-            <Text className='text-red-500 mt-1'> Password must contain at least 6 characters, {"\n"} including at least 1 letter and 1 number</Text>)}
-        </View>
+  <View style={styles.input_container}>
+    <Text className=" font-roboto color-[#6F6F6F] text-[16px]  mb-1">Password</Text>
+    <View className='flex-row items-center justify-center border-2 border-gray-200 bg-white pr-2 rounded-xl w-80'>
+      <TextInput
+        onChange={text => handlePassword(text)}
+        value={password}
+        secureTextEntry={showPassword}
+        placeholder="Your password here..."
+        style={styles.input}
+      />
+      <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+        {password.length <1 ? null:  (showPassword ?
+          <Feather name='eye' size={18} color={passwordVerified? 'green': 'red'}/>
+          :<Feather name='eye-off' size={18} color={passwordVerified? 'green': 'red'}/>)
+        }
+      </TouchableOpacity>
+    </View>
+    {password.length <1 ? null:  (passwordVerified ? null : 
+      <Text className='text-red-500 mt-1'> Password must contain at least 6 characters, {"\n"} including at least 1 letter and 1 number</Text>)}
+  </View>
 
-        <View style={styles.input_container}>
-          <Text className=" font-roboto color-[#6F6F6F] text-[16px]  mb-1">Confirm password</Text>
-          <View className='flex-row items-center justify-center border-2 border-gray-200 bg-white pr-2 rounded-xl w-80'>
-            <TextInput
-              onChange={text => handleRePassword(text)}
-              value={re_password}
-              secureTextEntry={showRePassword}
-              placeholder="Re-enter your password here..."
-              style={styles.input}
-            />
-            <TouchableOpacity onPress={() => setShowRePassword(!showRePassword)}>
-              {re_password.length <1 ? null:  (showRePassword ?
-                <Feather name='eye' size={18} color={rePasswordVerified? 'green': 'red'}/>
-                :<Feather name='eye-off' size={18} color={rePasswordVerified? 'green': 'red'}/>)
-              }
-            </TouchableOpacity>
-          </View>
-          {re_password.length <1 ? null:  (rePasswordVerified ? null : 
-            <Text className='text-red-500 mt-1'>Password does not match.</Text>)}
-        </View>
+  <View style={styles.input_container}>
+    <Text className=" font-roboto color-[#6F6F6F] text-[16px]  mb-1">Confirm password</Text>
+    <View className='flex-row items-center justify-center border-2 border-gray-200 bg-white pr-2 rounded-xl w-80'>
+      <TextInput
+        onChange={text => handleRePassword(text)}
+        value={re_password}
+        secureTextEntry={showRePassword}
+        placeholder="Re-enter your password here..."
+        style={styles.input}
+      />
+      <TouchableOpacity onPress={() => setShowRePassword(!showRePassword)}>
+        {re_password.length <1 ? null:  (showRePassword ?
+          <Feather name='eye' size={18} color={rePasswordVerified? 'green': 'red'}/>
+          :<Feather name='eye-off' size={18} color={rePasswordVerified? 'green': 'red'}/>)
+        }
+      </TouchableOpacity>
+    </View>
+    {re_password.length <1 ? null:  (rePasswordVerified ? null : 
+      <Text className='text-red-500 mt-1'>Password does not match.</Text>)}
+  </View>
 
-        <View className='items-center justify-center flex-row mt-6 mb-4 mr-5 mx-10'>
-          <Checkbox 
-            className='border-2 border-[#7F3DFF] rounded-md w-6 h-6 mr-2'
-            value={isSelected} 
-            onValueChange={setSelection} color={isSelected ? '#7F3DFF' : undefined}
-          />
+  <View className='items-center justify-center flex-row mt-6 mb-4 mr-5 mx-10'>
+    <Checkbox 
+      className='border-2 border-[#7F3DFF] rounded-md w-6 h-6 mr-2'
+      value={isSelected} 
+      onValueChange={setSelection} color={isSelected ? '#7F3DFF' : undefined}
+    />
 
-          <Text className='text-sm'>
-            By signing up, you agree to the
-            <Text className='text-[#7F3DFF]' onPress={()=>{}}> Terms of Service and Privacy Policy</Text>
-          </Text>
-        </View>
+    <Text className='text-sm'>
+      By signing up, you agree to the
+      <Text className='text-[#7F3DFF]' onPress={()=>{}}> Terms of Service and Privacy Policy</Text>
+    </Text>
+  </View>
 
-        <TouchableOpacity 
-          onPress={loginWithEmailPassword} 
-          className='bg-[#7F3DFF]  h-14 items-center justify-center rounded-2xl w-80 mt-4'
-        >
-          <Text className='color-[#fcfcfc] font-roboto font-semibold text-lg'>Sign Up</Text>
-        </TouchableOpacity>
+  <TouchableOpacity 
+    onPress={loginWithEmailPassword} 
+    className='bg-[#7F3DFF]  h-14 items-center justify-center rounded-2xl w-80 mt-4'
+  >
+    <Text className='color-[#fcfcfc] font-roboto font-semibold text-lg'>Sign Up</Text>
+  </TouchableOpacity>
 
-        <View className='items-center flex-row mt-2'>
-          <Text className='text-base font-roboto color-[#91919f]'>Already have an account?</Text>
-          <TouchableOpacity onPress={() => {}}>
-            <Text className='text-base font-roboto color-[#7F3DFF]'> Login</Text>
-          </TouchableOpacity>
-        </View>
+  <View className='items-center flex-row mt-2'>
+    <Text className='text-base font-roboto color-[#91919f]'>Already have an account?</Text>
+    <TouchableOpacity onPress={() => {}}>
+      <Text className='text-base font-roboto color-[#7F3DFF]'> Login</Text>
+    </TouchableOpacity>
+  </View>
+</View>
+
       </View>
-    </KeyboardAvoidingView>
+      
+    </KeyboardAwareScrollView>
   );
 
   async function loginWithEmailPassword() {

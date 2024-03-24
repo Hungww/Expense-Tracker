@@ -1,12 +1,15 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, FlatList } from 'react-native';
+import ForumFeed from '../components/ForumFeed';
+
 
 const ForumScreen = () => {
     return (
         <View>
-            <Text>ForumScreen!</Text>
+            <ForumFeed/>
         </View>
     );
 };
+
 
 export default ForumScreen;

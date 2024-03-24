@@ -2,12 +2,13 @@ import React from 'react';
 import { View, Text, FlatList, Image, FlatListComponent, TouchableOpacity } from 'react-native';
 import { NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
 
+
 const data = [
   {
     id: '1',
     sender: 'Hermann, Pfannel & Schumm',
     header:
-      'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl. Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.',
+      'Balance across envelopes',
     message:
       'Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.\n\nMauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.\n\nNullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.',
     initials: 'H',
@@ -19,8 +20,7 @@ const data = [
   {
     id: '2',
     sender: 'Ziemann, Lockman and Kuvalis',
-    header:
-      'Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam vel augue.',
+    header:'Changing Envelope Types?',
     message:
       'Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.\n\nMaecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.\n\nNullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.',
     initials: 'J',
@@ -32,8 +32,8 @@ const data = [
   {
     id: '3',
     sender: 'Daniel, Kuhn and Wolf',
-    header:
-      'Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh. Quisque id justo sit amet sapien dignissim vestibulum.',
+    header:'Income vs spending report',
+    
     message:
       'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.\n\nCurabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.',
     initials: 'Y',
@@ -266,28 +266,38 @@ const ForumFeed = () => {
   const renderItem = React.useCallback(
     ({ item }) => {
       return (
-        <TouchableOpacity>
+        <TouchableOpacity
+        style={{
+          flexDirection: 'row',
+          alignItems: "center",
+          paddingHorizontal: 5,
+          paddingVertical: 10,
+          borderTopWidth: 1,
+          borderTopColor: '#e9e9e9',
+        }}
+        >
           <Image
             source={{ uri: `https://forums.goodbudget.com/user_avatar/forums.goodbudget.com/paul_webb/48/842_2.png`}}
-            style={{marginRight: 16,marginTop: 8,}}
+            style={{width: 40,
+              height: 40,
+              borderRadius: 100,
+              marginRight: 10,}}
           />
-          <View>
-            <View style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between'}}
-            >
-              <Text>{item.sender}</Text>
-              <Text>{item.date}</Text>
-            </View>
-            <View style={{
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              flexGrow: 1,}}
-            >
-              <Text numberOfLines={1}>{item.header}</Text>
-              <Text numberOfLines={1}>{item.message}</Text>
-            </View>
-          </View>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: "center", }}>
+          <Text 
+            numberOfLines={2}
+            ellipsizeMode='tail'
+            style={{ flex: 8,paddingRight: 5}}
+          >
+            {item.header}
+          </Text>
+          <Text 
+            numberOfLines={1}
+            style={{ flex: 4, color: '#bdbdc3', fontSize: 12}}
+          >
+            {item.date}
+          </Text>
+        </View>
         </TouchableOpacity>
       );
     },

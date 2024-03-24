@@ -5,7 +5,11 @@ import ForumFeed from '../components/ForumFeed';
 
 const ForumScreen = () => {
     return (
-        <View>
+        <View style={{
+            flex: 1,
+            backgroundColor: 'white',
+        }}
+        >
             <ForumFeed/>
         </View>
     );

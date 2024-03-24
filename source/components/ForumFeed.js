@@ -271,7 +271,7 @@ const ForumFeed = () => {
           flexDirection: 'row',
           alignItems: "center",
           paddingHorizontal: 5,
-          paddingVertical: 10,
+          paddingVertical: 15,
           borderTopWidth: 1,
           borderTopColor: '#e9e9e9',
         }}
@@ -287,7 +287,7 @@ const ForumFeed = () => {
           <Text 
             numberOfLines={2}
             ellipsizeMode='tail'
-            style={{ flex: 8,paddingRight: 5}}
+            style={{ flex: 8,paddingRight: 5, fontSize: 16}}
           >
             {item.header}
           </Text>

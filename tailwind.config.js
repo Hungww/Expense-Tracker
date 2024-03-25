@@ -6,10 +6,10 @@ module.exports = {
       colors: {
         'onboard_description_color': 'rgba(145, 145, 159, 1)',
         'onboard_title_color': 'black',
-        'primary': '#7F3DFF',
-        'third': '#EEE5FF',
+        'primary': '#19B079',
+        'third': '#E5F6F0',
         'FCFCFC': '#FCFCFC',
-        '7F3DFF': '#7F3DFF',
+        '32B988': '#32B988',
       },
       fontFamily: {
         'roboto': ['Roboto', 'sans-serif'],

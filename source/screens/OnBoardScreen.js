@@ -17,19 +17,19 @@ const data = [
   {
     title: 'Intelligent\nmanagement',
     text: 'Easily manage your personal expenses.',
-    image: require('../../assets/test.json'),
+    image: require('../../assets/Savings2.json'),
     bg: 'white',
   },
   {
     title: 'Powerful AI',
     text: 'Effectively optimize your daily\n expense with our powerful AI',
-    image: require('../../assets/robot.json'),
+    image: require('../../assets/AI.json'),
     bg: 'white',
   },
   {
     title: 'Large community',
     text: "Be part of our community\nShare your experiences and idea with others",
-    image:require('../../assets/comm.json'),
+    image:require('../../assets/community.json'),
     bg: 'white',
   },
 ];
@@ -88,30 +88,33 @@ className="flex-1 items-center bg-white pt-20">
                   style={[
   
                     i === activeIndex
-                      ? {backgroundColor: '#7F3DFF', width: 16, height: 16, borderRadius: 8}
+                      ? {backgroundColor: '#19B079', width: 16, height: 16, borderRadius: 8}
                       : {backgroundColor: 'rgba(0, 0, 0, .2)'},
                   ]}
                   onPress={() => this.slider?.goToSlide(i, true)}
                 />
               ))}
           </View>
+          {(activeIndex === data.length - 1) &&
           <View className="flex-col items-center justify-center">
-            <TouchableOpacity
-              className="flex-1 items-center py-5 rounded-2xl bg-primary my-1"
-              style={[ {width: '96%'}]}
-              onPress={() => navigation.replace('Inside', {screen: 'SignUp'})}
-              >
-                <Text className=" text-FCFCFC font-bold text-center">Sign Up</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity 
-              className="flex-1 items-center py-5 rounded-2xl bg-third w-11/12 my-1"
-              style={[ {width: '96%'}]}
-              onPress={() => navigation.replace('Inside', {screen: 'Login'})}
+          <TouchableOpacity
+            className="flex-1 items-center py-5 rounded-2xl bg-primary my-1"
+            style={[ {width: '96%'}]}
+            onPress={() => navigation.replace('Inside', {screen: 'SignUp'})}
             >
-              <Text className=" text-7F3DFF font-bold text-center">Login</Text>
-            </TouchableOpacity>
-          </View>
+              <Text className=" text-FCFCFC font-bold text-center">Sign Up</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity 
+            className="flex-1 items-center py-5 rounded-2xl bg-third w-11/12 my-1"
+            style={[ {width: '96%'}]}
+            onPress={() => navigation.replace('Inside', {screen: 'Login'})}
+          >
+            <Text className=" text-32B988 font-bold text-center">Login</Text>
+          </TouchableOpacity>
+        </View>
+          }
+          
         </SafeAreaView>
       </View>
     );

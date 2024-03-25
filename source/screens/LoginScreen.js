@@ -36,7 +36,7 @@ export default function LoginScreen() {
         placeholder="Password"
         className="w-96 h-12 bg-white rounded-2xl px-5 mx-2 my-5"
         />
-      <Button title="Sign up" onPress={loginWithEmailPassword} />
+      <Button title="Log In" onPress={loginWithEmailPassword} />
     </View>
     );
 

@@ -17,18 +17,21 @@ const data = [
     title: "Intelligent\nmanagement",
     text: "Easily manage your personal expenses.",
     image: require("../../assets/Savings2.json"),
+    key: "1",
     bg: "white",
   },
   {
     title: "Powerful AI",
     text: "Effectively optimize your daily\n expense with our powerful AI",
     image: require("../../assets/AI.json"),
+    key: "2",
     bg: "white",
   },
   {
     title: "Large community",
     text: "Be part of our community\nShare your experiences and idea with others",
     image: require("../../assets/community.json"),
+    key: "3",
     bg: "white",
   },
 ];
@@ -85,7 +88,7 @@ export default function OnBoardScreen({ navigation }) {
       <View className="flex-1 items-center bg-white pt-20">
         {/* <Image source={item.image} style={styles.image} /> */}
         <LottieView
-          style={{ width: 310, height: 310 }}
+          style={item.key==="3"?{ width: 400, height: 400, marginTop:-40 }: { width: 310, height: 310, marginBottom: 48}}
           source={item.image}
           autoPlay
           loop
@@ -116,9 +119,10 @@ export default function OnBoardScreen({ navigation }) {
           >
             {data.length > 1 &&
               data.map((_, i) => (
-                <TouchableOpacity
+                
+                  <TouchableOpacity
                   className={activeIndex === data.length - 1?
-                    " w-2 h-2 rounded-lg mx-2 ":
+                    " w-2 h-2 rounded-lg mx-2 opacity-0 ":
                     " w-2 h-2 rounded-lg mx-2 "}
                   key={i}
                   style={[
@@ -132,7 +136,9 @@ export default function OnBoardScreen({ navigation }) {
                       : { backgroundColor: "rgba(0, 0, 0, .2)" },
                   ]}
                   onPress={() => this.slider?.goToSlide(i, true)}
-                />
+                /> 
+                
+                
               ))}
           </View>
           {activeIndex === data.length - 1 && (

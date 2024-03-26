@@ -6,7 +6,7 @@ import { NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
 const data = [
   {
     id: '1',
-    sender: 'Hermann, Pfannel & Schumm',
+    sender: 'Hermann',
     header:
       'Balance across envelopes',
     message:
@@ -266,39 +266,54 @@ const ForumFeed = () => {
   const renderItem = React.useCallback(
     ({ item }) => {
       return (
-        <TouchableOpacity
+        <View
         style={{
-          flexDirection: 'row',
-          alignItems: "center",
-          paddingHorizontal: 5,
+          flexDirection: 'column',
           paddingVertical: 15,
           borderTopWidth: 1,
           borderTopColor: '#e9e9e9',
         }}
         >
+        <View style={{ flexDirection: 'row', alignItems: "center", }}>
           <Image
             source={{ uri: `https://forums.goodbudget.com/user_avatar/forums.goodbudget.com/paul_webb/48/842_2.png`}}
-            style={{width: 40,
-              height: 40,
-              borderRadius: 100,
-              marginRight: 10,}}
+            style={{width: 30, height: 30, borderRadius: 100, marginRight: 5}}
+            resizeMode='contain'
           />
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: "center", }}>
+          <View style={{ flexDirection: 'column' }}>
+            <Text 
+              numberOfLines={1}
+              style={{ fontWeight: 500, fontSize: 15}}
+            >
+              {item.sender}
+            </Text>
+            <Text 
+              numberOfLines={1}
+              style={{color: '#bdbdc3', fontSize: 13}}
+            >
+              {item.date}
+            </Text>
+          </View>
+        </View>
+        <View style={{flexDirection: 'row', marginVertical:3 }}>
+            <Text style={{color: 'white', fontSize: 12, marginLeft:30,backgroundColor: '#ccc', borderRadius: 20, paddingHorizontal: 10, paddingVertical: 2, }}>Tag</Text>
+        </View>
+        <TouchableOpacity style = {{ flexDirection: 'column' }}>
           <Text 
-            numberOfLines={2}
-            ellipsizeMode='tail'
-            style={{ flex: 8,paddingRight: 5, fontSize: 16}}
+            numberOfLines={1}
+            style={{fontWeight: 500, fontSize: 20, marginBottom: 5}}
           >
             {item.header}
           </Text>
           <Text 
-            numberOfLines={1}
-            style={{ flex: 4, color: '#bdbdc3', fontSize: 12}}
+            numberOfLines={2}
+            style={{color: '#bdbdc3', fontSize: 14}}
           >
-            {item.date}
+            {item.message}
           </Text>
-        </View>
         </TouchableOpacity>
+
+        </View>
       );
     },
     []
@@ -320,8 +335,8 @@ const ForumFeed = () => {
         scrollEventThrottle={16}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
-          padding: 16,
-          paddingBottom: 60}
+          paddingHorizontal: 15,
+          paddingBottom: 90}
         }
       />
     </View>

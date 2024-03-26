@@ -7,33 +7,52 @@ const ForumScreen = () => {
     return (
         <View style={{
             backgroundColor: 'white',
-            paddingBottom: 20,
+            justifyContent: 'space-between',
         }}
         >
-            <View
-            style={{
+            <View style={{
                 flexDirection: 'row',
-                alignItems: "center",
+                justifyContent: 'space-between',
                 paddingHorizontal: 5,
                 borderTopWidth: 1,
                 borderTopColor: '#e9e9e9',
+                borderBottomWidth: 1,
+                borderBottomColor: '#e9e9e9',
             }}
             >
-            <TouchableOpacity>
-                <Text style={{fontSize: 16, fontWeight: 'semibold', padding: 10}}>Latest</Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-                <Text style={{fontSize: 16, fontWeight: 'semibold', padding: 10}}>Top</Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-                <Text style={{fontSize: 16, fontWeight: 'semibold', padding: 10}}>My Posts</Text>
-            </TouchableOpacity>
+                <View
+                style={{
+                    flexDirection: 'row',
+                    alignItems: "center",
+                }}
+                >
+                    <TouchableOpacity>
+                        <Text style={{fontSize: 16, fontWeight: 'semibold', padding: 10}}>Latest</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                        <Text style={{fontSize: 16, fontWeight: 'semibold', padding: 10}}>Top</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                        <Text style={{fontSize: 16, fontWeight: 'semibold', padding: 10}}>My Posts</Text>
+                    </TouchableOpacity>
+                
+                </View>
+                <TouchableOpacity className="bg-primary"
+                    style={{
+                        borderRadius:20,
+                        marginVertical: 8,
+                        alignItems: "center",
+                    }}
+                >
+                    <Text style={{fontSize: 16, fontWeight: 'semibold', paddingHorizontal:10, paddingVertical:5 , color:'white'}}>+ Create Posts</Text>
+                </TouchableOpacity>
             </View>
             <ForumFeed/>
 
-            <TouchableOpacity style={styles.fab}>
+            {/* <TouchableOpacity style={styles.fab}>
                 <Text style={styles.fabIcon}>+</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
+            
         </View>
     );
 };

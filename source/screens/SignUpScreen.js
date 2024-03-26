@@ -12,7 +12,7 @@ import Error from 'react-native-vector-icons/MaterialIcons';
 
 
 const Stack = createNativeStackNavigator();
-export default function SignUpScreen() {
+export default function SignUpScreen({navigation}) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -198,7 +198,12 @@ export default function SignUpScreen() {
         <View className='items-center flex-row mt-2'>
           <Text className='text-base font-roboto color-[#91919f]'>Already have an account?</Text>
           <TouchableOpacity onPress={() => {}}>
-            <Text className='text-base font-roboto color-primary'> Login</Text>
+            <Text 
+              className='text-base font-roboto color-primary'
+              onPress={() =>
+                navigation.replace("Inside", { screen: "Login" })
+              }
+            > Login</Text>
           </TouchableOpacity>
         </View>
       </View>

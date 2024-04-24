@@ -9,7 +9,7 @@ import Main from './Main';
 import SignUpScreen from './SignUpScreen';
 import LoginScreen from './LoginScreen';
 import AIScreen from './AIScreen';
-import ChatboxScreen from './ChatboxScreen';
+import ChatboxScreen from './ChatbotScreen';
 
 
 

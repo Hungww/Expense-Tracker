@@ -74,32 +74,12 @@ const ChatbotScreen = ({ navigation }) => {
       setMessages(previousMessages => GiftedChat.append(previousMessages, newMessages));
       setIsAIResponding(true);
       console.log(newMessages);
-      // const userMessage = newMessages[0].text;
-      // getResponse(userMessage,history).then(aiResponse => {
-      //   let cleanedAiResponse = aiResponse.trim();
-      //   const aiMessage = {
-      //     _id: Math.random(1000000),
-      //     text: cleanedAiResponse,
-      //     createdAt: new Date(),
-      //     user: {
-      //       _id: 2,
-      //       name: 'AI',
-      //       avatar: logo
-      //     },
-      //   };
-      //   console.log(aiMessage);
-      //   setHistory(prevHistory => [...prevHistory, 
-      //     { role: "user", parts: [{ text: userMessage }] },
-      //     { role: "model", parts: [{ text: cleanedAiResponse }] }
-      //   ]);
-      //   setMessages(previousMessages => GiftedChat.append(previousMessages, aiMessage));
-      //   setIsAIResponding(false);
-      // });
-
-      setTimeout(() => {
+      const userMessage = newMessages[0].text;
+      getResponse(userMessage,history).then(aiResponse => {
+        let cleanedAiResponse = aiResponse.trim();
         const aiMessage = {
           _id: Math.random(1000000),
-          text: 'Hello! This is an AI response.',
+          text: cleanedAiResponse,
           createdAt: new Date(),
           user: {
             _id: 2,
@@ -107,10 +87,30 @@ const ChatbotScreen = ({ navigation }) => {
             avatar: logo
           },
         };
+        console.log(aiMessage);
+        setHistory(prevHistory => [...prevHistory, 
+          { role: "user", parts: [{ text: userMessage }] },
+          { role: "model", parts: [{ text: cleanedAiResponse }] }
+        ]);
         setMessages(previousMessages => GiftedChat.append(previousMessages, aiMessage));
-        
         setIsAIResponding(false);
-      }, 3000);
+      });
+
+      // setTimeout(() => {
+      //   const aiMessage = {
+      //     _id: Math.random(1000000),
+      //     text: 'Hello! This is an AI response.',
+      //     createdAt: new Date(),
+      //     user: {
+      //       _id: 2,
+      //       name: 'AI',
+      //       avatar: logo
+      //     },
+      //   };
+      //   setMessages(previousMessages => GiftedChat.append(previousMessages, aiMessage));
+        
+      //   setIsAIResponding(false);
+      // }, 3000);
     
     };
     const renderChatEmpty = () => (

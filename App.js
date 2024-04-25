@@ -19,6 +19,8 @@ import SplashScreen from './source/screens/SplashScreen';
 import SignUpScreen from './source/screens/SignUpScreen';
 
 import {useFonts} from 'expo-font';
+import { Transaction } from 'firebase/firestore';
+import TransactionScreen from './source/screens/TransactionScreen';
 const Stack = createNativeStackNavigator();
 
 
@@ -51,7 +53,7 @@ export default function App() {
       }}
       >
         
-        
+        <Stack.Screen name="Transaction" component={TransactionScreen}  />
         <Stack.Screen name="OnBoard" component={OnBoardScreen}  />
         <Stack.Screen name="Inside" component={InsideScreen}  />
         

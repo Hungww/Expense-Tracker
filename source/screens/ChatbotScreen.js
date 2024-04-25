@@ -6,28 +6,51 @@ import { GiftedChat, Bubble, Composer,InputToolbar ,Send, Message, Time  } from 
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import logo from '../../assets/bot_logo.png';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Feather from 'react-native-vector-icons/Feather';
 import { runChat } from '../utils/ai';
 
 
 
-const ChatboxScreen = ({ navigation }) => {
+const ChatbotScreen = ({ navigation }) => {
     const [messages, setMessages] = useState([]);
     const [dots, setDots] = useState('.');
     const [isAIResponding, setIsAIResponding] = useState(false);
+    const [history, setHistory] = useState([
+      {
+        role: "user",
+        parts: [{ text: "About:\nExpense Tracker is a mobile application designed to help users manage personal finances effectively by tracking and managing expenses on a simple and user-friendly interface. with users. Not only that, this application also helps users make smart financial decisions by integrating a community forum where people can share experiences, knowledge and management tips. finance, along with a smart virtual assistant that integrates Gemini to provide useful financial advice to users. It offers various features such as expense tracking, AI assistance, Community Forum, OCR bill scanning.\n\nLayout:\nThe bottom navigation in the Monney app consists of five icons: Home, Transaction, Community forum, Profile and a big plus icon for for adding new transactions or expenses ( This screen allows users to add new transactions. Users can input details such as title, value, date, description, and category for the transaction. and the camera icon , user can press on it to use the ocr bill scanning function and the \"+ add\"  button is for user to add new Category)\n\nHome Screen:\nOn the top is  user name and icon, bellow that is the section display the name and balance of current wallet, you can press in this section will go to a new screen that view all wallet and option to add new wallet.  Next is the Quick action section : There are four quick action buttons: AI, Upgrade, Feedback, and Setting. Next is the Getting started section, this section have card display on a horizontal scrollview, each card have instruction for getting started with Mooney. Finall in the end is the Promotion section.\n\nTransaction Screen\nIt shows a chart, user can swipe to view other chart\nBelow the charts is the transaction list display recent transaction, press \"see all\" button to view the list in full screen\n\nChatbot restriction:\nIf user require any function that not appear above tell them that the app is not support that function\nIf the user's input is irrelevant, let them know you can't assist\nIf asked about topics not covered in the provided information, inform the user that you don't have that information.\nIf the user's input is not understood, indicate that you don't understand\nRespond only  with the information that you have been provide\nAll your reply will be short, in one paragraph and no yapping\n\nStarting chatbot:\nYour name is Monney Bot, an assistance chat bot in an budgeting app name Monney. Your job as a finance chatbot is to assists users with budgeting, investment decisions, and financial planning. Next you  will give a simple greeting: Hello there! How can I assist you today? And wait for input form user"}],
+      },
+      {
+        role: "model",
+        parts: [{ text: "Hello there! How can I assist you today?"}],
+      },
+    ]);
+
     const renewChat = () => {
       setMessages([]);
-    };
-    const onSuggestionPress = () => {
-    const newMessage = {
-        _id: Math.round(Math.random() * 1000000),
-        text: "What's the best way to track my expenses?",
-        createdAt: new Date(),
-        user: {
-          _id: 1,
-          name: 'User',
-          // And other user properties
+      setHistory([
+        {
+          role: "user",
+          parts: [{ text: "About:\nExpense Tracker is a mobile application designed to help users manage personal finances effectively by tracking and managing expenses on a simple and user-friendly interface. with users. Not only that, this application also helps users make smart financial decisions by integrating a community forum where people can share experiences, knowledge and management tips. finance, along with a smart virtual assistant that integrates Gemini to provide useful financial advice to users. It offers various features such as expense tracking, AI assistance, Community Forum, OCR bill scanning.\n\nLayout:\nThe bottom navigation in the Monney app consists of five icons: Home, Transaction, Community forum, Profile and a big plus icon for for adding new transactions or expenses ( This screen allows users to add new transactions. Users can input details such as title, value, date, description, and category for the transaction. and the camera icon , user can press on it to use the ocr bill scanning function and the \"+ add\"  button is for user to add new Category)\n\nHome Screen:\nOn the top is  user name and icon, bellow that is the section display the name and balance of current wallet, you can press in this section will go to a new screen that view all wallet and option to add new wallet.  Next is the Quick action section : There are four quick action buttons: AI, Upgrade, Feedback, and Setting. Next is the Getting started section, this section have card display on a horizontal scrollview, each card have instruction for getting started with Mooney. Finall in the end is the Promotion section.\n\nTransaction Screen\nIt shows a chart, user can swipe to view other chart\nBelow the charts is the transaction list display recent transaction, press \"see all\" button to view the list in full screen\n\nChatbot restriction:\nIf user require any function that not appear above tell them that the app is not support that function\nIf the user's input is irrelevant, let them know you can't assist\nIf asked about topics not covered in the provided information, inform the user that you don't have that information.\nIf the user's input is not understood, indicate that you don't understand\nRespond only  with the information that you have been provide\nAll your reply will be short, in one paragraph and no yapping\n\nStarting chatbot:\nYour name is Monney Bot, an assistance chat bot in an budgeting app name Monney. Your job as a finance chatbot is to assists users with budgeting, investment decisions, and financial planning. Next you  will give a simple greeting: Hello there! How can I assist you today? And wait for input form user"}],
         },
-      };
+        {
+          role: "model",
+          parts: [{ text: "Hello there! How can I assist you today?"}],
+        },
+      ]);
+
+    };
+    const onSuggestionPress = (suggestion) => {
+      setIsAIResponding(true);
+      const newMessage = {
+          _id: Math.round(Math.random() * 1000000),
+          text: suggestion,
+          createdAt: new Date(),
+          user: {
+            _id: 1,
+            name: 'User',
+          },
+        };
 
       onSend([newMessage]);
     };
@@ -42,15 +65,17 @@ const ChatboxScreen = ({ navigation }) => {
       return () => clearInterval(intervalId); // Clean up on unmount
     }, []);
 
-    const getResponse = async (message) => {
-      const response = await runChat(message);
+    const getResponse = async (message, history) => {
+      const response = await runChat(message, history);
       return response;
     };
     const onSend = newMessages => {
+      console.log("history", history);
       setMessages(previousMessages => GiftedChat.append(previousMessages, newMessages));
       setIsAIResponding(true);
+      console.log(newMessages);
       // const userMessage = newMessages[0].text;
-      // getResponse(userMessage).then(aiResponse => {
+      // getResponse(userMessage,history).then(aiResponse => {
       //   let cleanedAiResponse = aiResponse.trim();
       //   const aiMessage = {
       //     _id: Math.random(1000000),
@@ -63,6 +88,10 @@ const ChatboxScreen = ({ navigation }) => {
       //     },
       //   };
       //   console.log(aiMessage);
+      //   setHistory(prevHistory => [...prevHistory, 
+      //     { role: "user", parts: [{ text: userMessage }] },
+      //     { role: "model", parts: [{ text: cleanedAiResponse }] }
+      //   ]);
       //   setMessages(previousMessages => GiftedChat.append(previousMessages, aiMessage));
       //   setIsAIResponding(false);
       // });
@@ -86,9 +115,48 @@ const ChatboxScreen = ({ navigation }) => {
     };
     const renderChatEmpty = () => (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center',transform: [{ scaleY: -1 },{ scaleX: -1 }]}}>
-            <Text style={{ fontSize: 18, marginBottom: 20 }}>How can I help you with?</Text>
-            <TouchableOpacity style={{ padding: 10, borderRadius: 10, borderWidth: 1, }} onPress={onSuggestionPress}>
-                <Text style={{ color: '#776F69' }}>What's the best way to track my expenses?</Text>
+            <Text style={{ fontSize: 18, marginBottom: 20, fontWeight: 500 }}>How can I help you my friend? 😊</Text>
+            <TouchableOpacity 
+              style={{
+                marginBottom:10, paddingVertical: 10, paddingHorizontal:20, 
+                borderRadius: 30, borderWidth: 1, width :300, height:80, borderColor: 'rgba(119, 111, 105, 0.28)',
+                justifyContent:'center', alignContent:'center' 
+              }} 
+              onPress={() =>onSuggestionPress('What is the best way to track my expenses?')}
+            >
+              <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                <Text style={{ color: '#776F69', fontSize: 20, fontWeight:600 }}>What is</Text>
+                <Feather name='arrow-up-right' size={25} color='#776F69' style={{}}/>
+              </View>
+              <Text style={{ color: '#776F69', fontSize: 14 }}>the best way to track my expenses?</Text>
+            </TouchableOpacity>
+            <TouchableOpacity 
+              style={{
+                marginBottom:10, paddingVertical: 10, paddingHorizontal:20, 
+                borderRadius: 30, borderWidth: 1, width :300, height:80, borderColor: 'rgba(119, 111, 105, 0.28)', 
+                justifyContent:'center', alignContent:'center' 
+              }} 
+              onPress={() =>onSuggestionPress('How to add transaction by camera')}
+            >
+              <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                <Text style={{ color: '#776F69', fontSize: 20, fontWeight:600 }}>How to</Text>
+                <Feather name='arrow-up-right' size={25} color='#776F69' style={{}}/>
+              </View>
+              <Text style={{ color: '#776F69', fontSize: 14 }}>add transaction by camera</Text>
+            </TouchableOpacity>
+            <TouchableOpacity 
+              style={{ 
+                paddingVertical: 10, paddingHorizontal:20, 
+                borderRadius: 30, borderWidth: 1, width :300, height:80, borderColor: 'rgba(119, 111, 105, 0.28)', 
+                justifyContent:'center', alignContent:'center' 
+              }} 
+              onPress = {() =>onSuggestionPress('Tell me about the Monney budgeting application')}
+            >
+              <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                <Text style={{ color: '#776F69', fontSize: 20, fontWeight:600 }}>Tell me</Text>
+                <Feather name='arrow-up-right' size={25} color='#776F69' style={{}}/>
+              </View>
+              <Text style={{ color: '#776F69', fontSize: 14 }}>about the Monney budgeting application</Text>
             </TouchableOpacity>
         </View>
       );
@@ -132,7 +200,7 @@ const ChatboxScreen = ({ navigation }) => {
                 width: 270,
                 borderRadius: 25,
                 borderWidth: 1,
-                borderColor: 'grey',
+                borderColor: 'rgba(0, 0, 0, 0.28)',
                 padding: 10,
                 color: 'black',
                 backgroundColor: '#CFFAEA',
@@ -171,13 +239,13 @@ const ChatboxScreen = ({ navigation }) => {
       const renderFooter = () => {
         if (isAIResponding) {
           return (
-            <View style={{ marginTop: 5, alignItems: 'center', backgroundColor: 'transparent'}}>
+            <View style={{ marginTop: 5, marginBottom:10 , alignItems: 'center', backgroundColor: 'transparent'}}>
               <Text style={{ fontSize: 10, color: '#776F69', fontWeight: 500 }}>AI is responding{dots}</Text>
             </View>
           );
         } else {
           return (
-            <View style={{ marginTop: 5, alignItems: 'center', backgroundColor: 'transparent' }}>
+            <View style={{ marginTop: 5, marginBottom:10 , alignItems: 'center', backgroundColor: 'transparent' }}>
             </View>
           );
         }
@@ -217,4 +285,4 @@ const ChatboxScreen = ({ navigation }) => {
     );
   };
 
-export default ChatboxScreen;
+export default ChatbotScreen;

@@ -10,7 +10,8 @@ const {
   const MODEL_NAME = "gemini-1.5-pro-latest";
   const API_KEY = "AIzaSyBk_Rn5vFxUNWKD4S1Dk1DOjfzqR0kI3z4";
   
-  export async function runChat(userInput) {
+  export async function runChat(userInput, history) {
+    console.log("history", history);
     const genAI = new GoogleGenerativeAI(API_KEY);
     const model = genAI.getGenerativeModel({ model: MODEL_NAME });
   
@@ -43,20 +44,14 @@ const {
     const chat = model.startChat({
       generationConfig,
       safetySettings,
-      history: [
-        {
-          role: "user",
-          parts: [{ text: "Monney is a budgeting app designed to help users manage their finances effectively. It offers features such as expense tracking, AI assistance, Community Forum, OCR bill scanning.\nThe bottom navigation in the Monney app consists of five icons: Home, Transaction, Community forum, Profile and a big plus icon for for adding new transactions or expenses ( This screen allows users to add new transactions. Users can input details such as title, value, date, description, and category for the transaction. and the camera icon , user can press on it to use the ocr bill scanning function and the \"+ add\"  button is for user to add new Category)\n\nHome Screen:\nOn the top is  user name and icon, bellow that is the section display the name and balance of current wallet, you can press in this section will go to a new screen that view all wallet and option to add new wallet.  Next is the Quick action section : There are four quick action buttons: AI, Upgrade, Feedback, and Setting. Next is the Getting started section, this section have card display on a horizontal scrollview, each card have instruction for getting started with Mooney. Finall in the end is the Promotion section.\n\nTransaction Screen\nIt shows a chart, user can swipe to view other chart\nBelow the charts is the transaction list display recent transaction, press \"see all\" button to view the list in full screen\n\nYour name is Monney Bot, an assitance chat bot in an budgeting app name Monney. Your job as a finance chatbot is to assists users with budgeting, investment decisions, and financial planning. All your reply will be short, in one paragraph and no yapping, Next you  will give a simple greeting. (Hello there! How can I assist you today?)"}],
-        },
-        {
-          role: "model",
-          parts: [{ text: "Hello there! How can I assist you today?"}],
-        },
-      ],
+      history: history,
     });
-  
+    // console.log("chat", chat.getHistory());
     const result = await chat.sendMessage(userInput);
     const response = result.response;
     return response.text();
+    
+    // const response = "Hello! This is an AI response.";
+    // return response;
   }
   

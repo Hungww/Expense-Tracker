@@ -9,7 +9,7 @@ import Main from './Main';
 import SignUpScreen from './SignUpScreen';
 import LoginScreen from './LoginScreen';
 import AIScreen from './AIScreen';
-import ChatboxScreen from './ChatbotScreen';
+import ChatbotScreen from './ChatbotScreen';
 
 
 
@@ -53,7 +53,7 @@ export default function InsideScreen({  route ,navigation }) {
       {user_uid ? (
         <>
         <Stack.Screen name="Main" component={Main} />
-        <Stack.Screen name="Chatbox" component={ChatboxScreen} />
+        <Stack.Screen name="Chatbot" component={ChatbotScreen} />
         </>
       ) : (
         

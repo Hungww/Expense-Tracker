@@ -21,6 +21,7 @@ import SignUpScreen from './source/screens/SignUpScreen';
 import {useFonts} from 'expo-font';
 import { Transaction } from 'firebase/firestore';
 import TransactionScreen from './source/screens/TransactionScreen';
+import { Knewave_400Regular } from '@expo-google-fonts/knewave';
 const Stack = createNativeStackNavigator();
 
 
@@ -38,6 +39,7 @@ export default function App() {
     'Roboto-MediumItalic': require('./assets/fonts/Roboto-MediumItalic.ttf'),
     'Roboto-Black': require('./assets/fonts/Roboto-Black.ttf'),
     'Roboto-BlackItalic': require('./assets/fonts/Roboto-BlackItalic.ttf'),
+    Knewave_400Regular
   });
   if (!fontsLoaded){
     return (

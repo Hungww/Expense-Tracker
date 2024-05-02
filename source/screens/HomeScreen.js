@@ -1,11 +1,14 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { Button, View, Text } from 'react-native';
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
     return (
         <View>
-            <Text>Hello, World!</Text>
-        </View>
+      <Button
+        title="Go to Chatbot"
+        onPress={() => navigation.navigate('Chatbot')}
+      />
+    </View>
     );
 };
 

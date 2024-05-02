@@ -2,6 +2,10 @@
 
 ExpenseTracker, exactly as it name, an expense tracker app  for dealing with your budget management process.
 
+Behance: https://www.behance.net/gallery/195433669/Mooney
+
+Figma: https://www.figma.com/file/FrvX7oBF4rvjakOKKNemHi/BTL-MOBILE?type=design&node-id=0%3A1&mode=design&t=JuLOdom2qJwz76jO-1
+
 ## Installation
 
 Use the package manager [npm](https://www.npmjs.com/) to install all dependencies.

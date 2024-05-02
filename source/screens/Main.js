@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import HomeScreen from './HomeScreen';
 import AIScreen from './AIScreen';
+import TransactionScreen from './TransactionScreen';
 import ForumScreen from './ForumScreen';
 import AccountScreen from './AccountScreen';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -26,10 +27,10 @@ export default function Main() {
           tabBarIcon: ({ color, size }) => ( <MaterialIcons name="home" color={color} size={size} />),
         }}/>
       <Tab.Screen 
-        name="AI" 
-        component={AIScreen} 
+        name="Transaction"
+        component={TransactionScreen}
         options={{
-          tabBarIcon: ({ color, size }) => ( <MaterialIcons name="android" color={color} size={size} />),
+          tabBarIcon: ({ color, size }) => ( <MaterialIcons name="swap-horiz" color={color} size={size} />),
         }}/>
       <Tab.Screen 
         name="Forum" 

@@ -25,7 +25,6 @@ module.exports = {
         'roboto-black': ['Roboto-Black', 'sans-serif'],
         'roboto-blackitalic': ['Roboto-BlackItalic', 'sans-serif'],
 
-
         
       },
 

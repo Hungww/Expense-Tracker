@@ -18,11 +18,29 @@ const ChatbotScreen = ({ navigation }) => {
     const [history, setHistory] = useState([
       {
         role: "user",
-        parts: [{ text: "About:\nExpense Tracker is a mobile application designed to help users manage personal finances effectively by tracking and managing expenses on a simple and user-friendly interface. with users. Not only that, this application also helps users make smart financial decisions by integrating a community forum where people can share experiences, knowledge and management tips. finance, along with a smart virtual assistant that integrates Gemini to provide useful financial advice to users. It offers various features such as expense tracking, AI assistance, Community Forum, OCR bill scanning.\n\nLayout:\nThe bottom navigation in the Monney app consists of five icons: Home, Transaction, Community forum, Profile and a big plus icon for for adding new transactions or expenses ( This screen allows users to add new transactions. Users can input details such as title, value, date, description, and category for the transaction. and the camera icon , user can press on it to use the ocr bill scanning function and the \"+ add\"  button is for user to add new Category)\n\nHome Screen:\nOn the top is  user name and icon, bellow that is the section display the name and balance of current wallet, you can press in this section will go to a new screen that view all wallet and option to add new wallet.  Next is the Quick action section : There are four quick action buttons: AI, Upgrade, Feedback, and Setting. Next is the Getting started section, this section have card display on a horizontal scrollview, each card have instruction for getting started with Mooney. Finall in the end is the Promotion section.\n\nTransaction Screen\nIt shows a chart, user can swipe to view other chart\nBelow the charts is the transaction list display recent transaction, press \"see all\" button to view the list in full screen\n\nChatbot restriction:\nIf user require any function that not appear above tell them that the app is not support that function\nIf the user's input is irrelevant, let them know you can't assist\nIf asked about topics not covered in the provided information, inform the user that you don't have that information.\nIf the user's input is not understood, indicate that you don't understand\nRespond only  with the information that you have been provide\nAll your reply will be short, in one paragraph and no yapping\n\nStarting chatbot:\nYour name is Monney Bot, an assistance chat bot in an budgeting app name Monney. Your job as a finance chatbot is to assists users with budgeting, investment decisions, and financial planning. Next you  will give a simple greeting: Hello there! How can I assist you today? And wait for input form user"}],
+        parts: [{ text: `About:
+        Expense Tracker is a mobile application designed to help users manage personal finances effectively by tracking and managing expenses on a simple and user-friendly interface. with users. Not only that, this application also helps users make smart financial decisions by integrating a community forum where people can share experiences, knowledge and management tips. finance, along with a smart virtual assistant that integrates Gemini to provide useful financial advice to users. It offers various features such as expense tracking, AI assistance, Community Forum, OCR bill scanning.
+        Layout:
+        The bottom navigation in the Monney app consists of five icons: Home, Transaction, Community forum, Profile and a big plus icon for for adding new transactions or expenses ( This screen allows users to add new transactions. Users can input details such as title, value, date, description, and category for the transaction. and the camera icon , user can press on it to use the ocr bill scanning function and the "+ add" button is for user to add new Category)
+        Home Screen:
+        On the top is user name and icon, bellow that is the section display the name and balance of current wallet, you can press in this section will go to a new screen that view all wallet and option to add new wallet. Next is the Quick action section : There are four quick action buttons: AI, Upgrade, Feedback, and Setting. Next is the Getting started section, this section have card display on a horizontal scrollview, each card have instruction for getting started with Mooney. Finall in the end is the Promotion section.
+        Transaction Screen
+        It shows a chart, user can swipe to view other chart
+        Below the charts is the transaction list display recent transaction, press "see all" button to view the list in full screen
+        Chatbot restriction:
+        If user require any function that not appear above tell them that the app is not support that function
+        If the user's input is irrelevant, let them know you can't assist
+        If asked about topics not covered in the provided information, inform the user that you don't have that information.
+        If the user's input is not understood, indicate that you don't understand
+        Respond only with the information that you have been provide
+        All your reply will be short, in one paragraph and no yapping
+        Starting chatbot:
+        Your name is Monney Bot, an assistance chat bot in an budgeting app name Monney. Your job as a finance chatbot is to assists users with budgeting, investment decisions, and financial planning. Now wait for input from the user"
+        `}],
       },
       {
         role: "model",
-        parts: [{ text: "Hello there! How can I assist you today?"}],
+        parts: [{ text: "Hello there, I'm Monney Bot. How can I assist you today?"}],
       },
     ]);
 
@@ -31,11 +49,29 @@ const ChatbotScreen = ({ navigation }) => {
       setHistory([
         {
           role: "user",
-          parts: [{ text: "About:\nExpense Tracker is a mobile application designed to help users manage personal finances effectively by tracking and managing expenses on a simple and user-friendly interface. with users. Not only that, this application also helps users make smart financial decisions by integrating a community forum where people can share experiences, knowledge and management tips. finance, along with a smart virtual assistant that integrates Gemini to provide useful financial advice to users. It offers various features such as expense tracking, AI assistance, Community Forum, OCR bill scanning.\n\nLayout:\nThe bottom navigation in the Monney app consists of five icons: Home, Transaction, Community forum, Profile and a big plus icon for for adding new transactions or expenses ( This screen allows users to add new transactions. Users can input details such as title, value, date, description, and category for the transaction. and the camera icon , user can press on it to use the ocr bill scanning function and the \"+ add\"  button is for user to add new Category)\n\nHome Screen:\nOn the top is  user name and icon, bellow that is the section display the name and balance of current wallet, you can press in this section will go to a new screen that view all wallet and option to add new wallet.  Next is the Quick action section : There are four quick action buttons: AI, Upgrade, Feedback, and Setting. Next is the Getting started section, this section have card display on a horizontal scrollview, each card have instruction for getting started with Mooney. Finall in the end is the Promotion section.\n\nTransaction Screen\nIt shows a chart, user can swipe to view other chart\nBelow the charts is the transaction list display recent transaction, press \"see all\" button to view the list in full screen\n\nChatbot restriction:\nIf user require any function that not appear above tell them that the app is not support that function\nIf the user's input is irrelevant, let them know you can't assist\nIf asked about topics not covered in the provided information, inform the user that you don't have that information.\nIf the user's input is not understood, indicate that you don't understand\nRespond only  with the information that you have been provide\nAll your reply will be short, in one paragraph and no yapping\n\nStarting chatbot:\nYour name is Monney Bot, an assistance chat bot in an budgeting app name Monney. Your job as a finance chatbot is to assists users with budgeting, investment decisions, and financial planning. Next you  will give a simple greeting: Hello there! How can I assist you today? And wait for input form user"}],
+          parts: [{ text: `About:
+          Expense Tracker is a mobile application designed to help users manage personal finances effectively by tracking and managing expenses on a simple and user-friendly interface. with users. Not only that, this application also helps users make smart financial decisions by integrating a community forum where people can share experiences, knowledge and management tips. finance, along with a smart virtual assistant that integrates Gemini to provide useful financial advice to users. It offers various features such as expense tracking, AI assistance, Community Forum, OCR bill scanning.
+          Layout:
+          The bottom navigation in the Monney app consists of five icons: Home, Transaction, Community forum, Profile and a big plus icon for for adding new transactions or expenses ( This screen allows users to add new transactions. Users can input details such as title, value, date, description, and category for the transaction. and the camera icon , user can press on it to use the ocr bill scanning function and the "+ add" button is for user to add new Category)
+          Home Screen:
+          On the top is user name and icon, bellow that is the section display the name and balance of current wallet, you can press in this section will go to a new screen that view all wallet and option to add new wallet. Next is the Quick action section : There are four quick action buttons: AI, Upgrade, Feedback, and Setting. Next is the Getting started section, this section have card display on a horizontal scrollview, each card have instruction for getting started with Mooney. Finall in the end is the Promotion section.
+          Transaction Screen
+          It shows a chart, user can swipe to view other chart
+          Below the charts is the transaction list display recent transaction, press "see all" button to view the list in full screen
+          Chatbot restriction:
+          If user require any function that not appear above tell them that the app is not support that function
+          If the user's input is irrelevant, let them know you can't assist
+          If asked about topics not covered in the provided information, inform the user that you don't have that information.
+          If the user's input is not understood, indicate that you don't understand
+          Respond only with the information that you have been provide
+          All your reply will be short, in one paragraph and no yapping
+          Starting chatbot:
+          Your name is Monney Bot, an assistance chat bot in an budgeting app name Monney. Your job as a finance chatbot is to assists users with budgeting, investment decisions, and financial planning. Now wait for input from the user"
+          `,}],
         },
         {
           role: "model",
-          parts: [{ text: "Hello there! How can I assist you today?"}],
+          parts: [{ text: "Hello there, I'm Monney Bot. How can I assist you today?"}],
         },
       ]);
 
@@ -62,7 +98,7 @@ const ChatbotScreen = ({ navigation }) => {
         });
       }, 500);
     
-      return () => clearInterval(intervalId); // Clean up on unmount
+      return () => clearInterval(intervalId);
     }, []);
 
     const getResponse = async (message, history) => {
@@ -122,13 +158,13 @@ const ChatbotScreen = ({ navigation }) => {
                 borderRadius: 30, borderWidth: 1, width :300, height:80, borderColor: 'rgba(119, 111, 105, 0.28)',
                 justifyContent:'center', alignContent:'center' 
               }} 
-              onPress={() =>onSuggestionPress('What is the best way to track my expenses?')}
+              onPress={() =>onSuggestionPress('What is the best app to track my expenses?')}
             >
               <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                 <Text style={{ color: '#776F69', fontSize: 20, fontWeight:600 }}>What is</Text>
                 <Feather name='arrow-up-right' size={25} color='#776F69' style={{}}/>
               </View>
-              <Text style={{ color: '#776F69', fontSize: 14 }}>the best way to track my expenses?</Text>
+              <Text style={{ color: '#776F69', fontSize: 14 }}>the best app to track my expenses?</Text>
             </TouchableOpacity>
             <TouchableOpacity 
               style={{

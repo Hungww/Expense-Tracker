@@ -8,7 +8,6 @@ import TransactionComponent from "../components/TransactionComponent";
 const TransactionScreen = () => {
     return (
         <SafeAreaView className="px-3.5 bg-white h-full">
-            <IconHeading />
             <View>
                 <Text className="font-roboto-bold text-[#828282] text-lg">Total Spending</Text>
                 <Text className="font-roboto-medium text-2xl">$152</Text>

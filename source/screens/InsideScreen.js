@@ -53,7 +53,6 @@ export default function InsideScreen({  route ,navigation }) {
       {user_uid ? (
         <>
         <Stack.Screen name="Main" component={Main} />
-        <Stack.Screen name="Chatbot" component={ChatbotScreen} />
         </>
       ) : (
         

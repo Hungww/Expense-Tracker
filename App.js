@@ -26,6 +26,11 @@ const Stack = createNativeStackNavigator();
 
 
 export default function App() {
+  const error = console.error;
+  console.error = (...args) => {
+    if (/defaultProps/.test(args[0])) return;
+    error(...args);
+  };
   const [fontsLoaded] = useFonts({
     'Roboto': require('./assets/fonts/Roboto-Regular.ttf'),
     'Roboto-Bold': require('./assets/fonts/Roboto-Bold.ttf'),
@@ -54,8 +59,6 @@ export default function App() {
       
       }}
       >
-        
-        <Stack.Screen name="Transaction" component={TransactionScreen}  />
         <Stack.Screen name="OnBoard" component={OnBoardScreen}  />
         <Stack.Screen name="Inside" component={InsideScreen}  />
         

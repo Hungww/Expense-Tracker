@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useState } from "react";
 import { db, auth } from '../utils/firebasecfg';
 import { getAuth, createUserWithEmailAndPassword,onAuthStateChanged  } from "firebase/auth";
+import { createContext } from 'react';
 
 //Importing the screens
 import Main from './Main';
@@ -10,11 +11,12 @@ import SignUpScreen from './SignUpScreen';
 import LoginScreen from './LoginScreen';
 import AIScreen from './AIScreen';
 import ChatbotScreen from './ChatbotScreen';
+import { Use } from 'react-native-svg';
 
 
 
 const Stack = createNativeStackNavigator();
-
+export const userContext = createContext(null);
 export default function InsideScreen({  route ,navigation }) {
 
   const ScreenName = route.params.screen;
@@ -29,6 +31,10 @@ export default function InsideScreen({  route ,navigation }) {
 
 
   const [user_uid, setUser_uid] = useState("");
+  const User ={
+    user_uid: user_uid,
+    setUser_uid: setUser_uid
+  }
   onAuthStateChanged(auth, (user) => {
     if (user) {
       // User is signed in, see docs for a list of available properties
@@ -44,7 +50,8 @@ export default function InsideScreen({  route ,navigation }) {
     }
   });
   return (
-    <Stack.Navigator      
+    <userContext.Provider value={User}>
+          <Stack.Navigator      
     screenOptions={{
       headerShown: false
     
@@ -62,5 +69,7 @@ export default function InsideScreen({  route ,navigation }) {
       )}
       
     </Stack.Navigator>
+    </userContext.Provider>
+
   );
 }

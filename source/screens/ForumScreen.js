@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet,TouchableOpacity  } from 'react-native';
 import ForumFeed from '../components/ForumFeed';
 import { useEffect, useContext } from 'react';
-import { userContext } from './InsideScreen';
+import { userContext } from '../contexts/UserProvider';
 
 
 const ForumScreen = () => {

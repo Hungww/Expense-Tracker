@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'; // Or your preferred icon library
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const QuickActions = ({navigation}) => {
   const actions = [
     { icon: 'robot', label: 'Ai', route: 'Chatbot' },
-    { icon: 'diamond-stone', label: 'Upgrade' , route: 'Chatbot' },
-    { icon: 'note-edit-outline', label: 'FeedBack' , route: 'Chatbot' },
+    { icon: 'diamond-stone', label: 'Upgrade' , route: 'Subscription' },
+    { icon: 'note-edit-outline', label: 'FeedBack' , route: 'Feedback' },
     { icon: 'dots-horizontal', label: 'More' , route: 'Chatbot' },
   ];
 
@@ -23,6 +23,7 @@ const QuickActions = ({navigation}) => {
           </TouchableOpacity>
         ))}
       </View>
+      <View style={{ height: 1, backgroundColor: '#E5E7EB', marginTop: 16 }} />
     </View>
   );
 };

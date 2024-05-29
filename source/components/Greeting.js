@@ -10,7 +10,7 @@ const Avatar = () => {
 
 const Greeting = () => {
   return (
-    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
       <View>
         <Text style={{ color: '#828282', fontSize: 16 }}>Hello,</Text>
         <Text style={{ fontWeight: 'bold', fontSize: 20 }}>Hi James</Text>

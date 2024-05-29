@@ -13,17 +13,20 @@ import AccountScreen from './AccountScreen';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import IconHeading from "../components/IconHeading";
 import ChatbotScreen from './ChatbotScreen';
+import Feedback from '../components/FeedBack';
+import Subscription from '../components/Subscription';
 
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 const HomeStack = ({ navigation, route }) => {
+  const tabHiddenRoutes = ["Chatbot", "Feedback", "Subscription"];
   React.useLayoutEffect(() => {
-    const routeName = getFocusedRouteNameFromRoute(route);
-    if (routeName === "Chatbot"){
+    if (tabHiddenRoutes.includes(getFocusedRouteNameFromRoute(route))){
       navigation.setOptions({tabBarStyle: {display: 'none'}});
-    }else {
+    }
+    else {
       navigation.setOptions({tabBarStyle: {display: 'flex'}});
     }
 }, [navigation, route]);
@@ -41,6 +44,18 @@ const HomeStack = ({ navigation, route }) => {
         headerShown: false
       }}
       />
+      <Stack.Screen
+      name="Feedback"
+      component={Feedback}
+      options={{
+        headerShown: false
+      }}/>
+      <Stack.Screen
+      name="Subscription"
+      component={Subscription}
+      options={{
+        headerShown: false
+      }}/>
     </Stack.Navigator>
   );
 };

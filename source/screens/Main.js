@@ -15,6 +15,7 @@ import IconHeading from "../components/IconHeading";
 import ChatbotScreen from './ChatbotScreen';
 import Feedback from '../components/FeedBack';
 import Subscription from '../components/Subscription';
+import BottomNavigation from '../components/BottomNavigation';
 
 
 const Tab = createBottomTabNavigator();
@@ -68,40 +69,7 @@ export default function Main() {
   
   }
   return (
-    <Tab.Navigator>
-      <Tab.Screen 
-        name="Home"
-        options={{
-          headerShown: false,
-          tabBarStyle:{display: 'none'},
-          tabBarIcon: ({ color, size }) => ( <MaterialIcons name="home" color={color} size={size} />),
-        }}>
-        {(props) => <HomeStack {...props} />}
-      </Tab.Screen>
-      <Tab.Screen 
-        name="Transaction"
-        component={TransactionScreen}
-        options={{
-          header: () => <IconHeading />,
-          tabBarIcon: ({ color, size }) => ( <MaterialIcons name="swap-horiz" color={color} size={size} />),
-        }}/>
-      <Tab.Screen 
-        name="Forum" 
-        component={ForumScreen}
-        options={{
-          header: () => <IconHeading />,
-          tabBarIcon: ({ color, size }) => ( <MaterialIcons name="forum" color={color} size={size} />),
-        }}/>
-
-      <Tab.Screen 
-        name="Account"
-        component={AccountScreen}
-        options={{
-          header: () => <IconHeading />,
-          tabBarIcon: ({ color, size }) => ( <MaterialIcons name="account-circle" color={color} size={size} />),
-        }}/> 
-    </Tab.Navigator>
-   
+    <BottomNavigation />
   );
 
 }

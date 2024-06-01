@@ -19,10 +19,13 @@ import SplashScreen from "./source/screens/SplashScreen";
 import SignUpScreen from "./source/screens/SignUpScreen";
 import { UserProvider } from "./source/contexts/UserProvider";
 
-import { useFonts } from "expo-font";
-import { Transaction } from "firebase/firestore";
-import TransactionScreen from "./source/screens/TransactionScreen";
-import { Knewave_400Regular } from "@expo-google-fonts/knewave";
+
+import {useFonts} from 'expo-font';
+import { Transaction } from 'firebase/firestore';
+import TransactionScreen from './source/screens/TransactionScreen';
+import { Knewave_400Regular } from '@expo-google-fonts/knewave';
+
+import BottomNavigation from './source/components/BottomNavigation';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -50,6 +53,7 @@ export default function App() {
     return <SplashScreen />;
   }
   return (
+
     <UserProvider>
       <NavigationContainer>
         <Stack.Navigator

@@ -1,21 +1,28 @@
 import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import HomeScreen from "../screens/HomeScreen";
 import TransactionScreen from "../screens/TransactionScreen";
 import ForumScreen from "../screens/ForumScreen";
 import ProfileScreen from "../screens/AccountScreen";
 import AddTransactionModal from "../components/AddTransactionModal";
+import ChatbotScreen from "../screens/ChatbotScreen";
+import Feedback from "../components/FeedBack";
+import Subscription from "../components/Subscription";
+import IconHeading from "../components/IconHeading";
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
 import { Entypo } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
+
 const screenOptions = {
     tabBarShowLabel:false,
-    headerShown:false,
     tabBarStyle:{
       position: "absolute",
       bottom: 0,
@@ -26,6 +33,46 @@ const screenOptions = {
       background: "#fff"
     }
 }
+
+const HomeStack = ({ navigation, route }) => {
+    const tabHiddenRoutes = ["Chatbot", "Feedback", "Subscription"];
+    React.useLayoutEffect(() => {
+      if (tabHiddenRoutes.includes(getFocusedRouteNameFromRoute(route))){
+        navigation.setOptions({tabBarStyle: {display: 'none'}});
+      }
+      else {
+        navigation.setOptions({tabBarStyle: {display: 'flex'}});
+      }
+  }, [navigation, route]);
+    return (
+      <Stack.Navigator>
+        <Stack.Screen name="HomeScreen" component={HomeScreen} 
+        options={{
+          header: () => <IconHeading />,
+        }}
+        />
+        <Stack.Screen 
+        name="Chatbot"
+        component={ChatbotScreen} 
+        options={{
+          headerShown: false
+        }}
+        />
+        <Stack.Screen
+        name="Feedback"
+        component={Feedback}
+        options={{
+          headerShown: false
+        }}/>
+        <Stack.Screen
+        name="Subscription"
+        component={Subscription}
+        options={{
+          headerShown: false
+        }}/>
+      </Stack.Navigator>
+    );
+};
 
 const BottomNavigation = () => {
     const [isModalVisible, setModalVisible] = useState(false);
@@ -39,7 +86,6 @@ const BottomNavigation = () => {
             <Tab.Navigator screenOptions={screenOptions}>
                 <Tab.Screen 
                     name="Home" 
-                    component={HomeScreen} 
                     options={{
                         tabBarIcon: ({focused})=>{
                             return (
@@ -50,12 +96,14 @@ const BottomNavigation = () => {
                             )
                         }
                     }}
-                />
+                >{(props) => <HomeStack {...props} />}
+                </Tab.Screen>
 
                 <Tab.Screen 
                     name="Transaction" 
                     component={TransactionScreen} 
                     options={{
+                        header: () => <IconHeading />,
                         tabBarIcon: ({focused})=>{
                             return (
                                 <View style={{alignItems: "center", justifyContent: "center"}}> 

@@ -22,6 +22,8 @@ import {useFonts} from 'expo-font';
 import { Transaction } from 'firebase/firestore';
 import TransactionScreen from './source/screens/TransactionScreen';
 import { Knewave_400Regular } from '@expo-google-fonts/knewave';
+
+import BottomNavigation from './source/components/BottomNavigation';
 const Stack = createNativeStackNavigator();
 
 
@@ -47,21 +49,24 @@ export default function App() {
       )
   }
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-      screenOptions={{
-        headerShown: false
-      
-      }}
-      >
+    <>
+      <NavigationContainer>
+        <Stack.Navigator
+        screenOptions={{
+          headerShown: false
         
-        <Stack.Screen name="Transaction" component={TransactionScreen}  />
-        <Stack.Screen name="OnBoard" component={OnBoardScreen}  />
-        <Stack.Screen name="Inside" component={InsideScreen}  />
-        
-        
-      </Stack.Navigator>
-    </NavigationContainer>
+        }}
+        >
+          
+          <Stack.Screen name="BottomNavigation" component={BottomNavigation}  />
+          <Stack.Screen name="OnBoard" component={OnBoardScreen}  />
+          <Stack.Screen name="Inside" component={InsideScreen}  />
+          
+          
+        </Stack.Navigator>
+      </NavigationContainer>
+      {/* <BottomNavigation/> */}
+    </>
   );
 
 }

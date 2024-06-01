@@ -3,7 +3,7 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 
 const IconHeading = () => {
     return (
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity onPress={() => {}} className="bg-white">
             <View className="flex-row items-center">
                 <Image
                     source={require("../../assets/expense_logo.png")}

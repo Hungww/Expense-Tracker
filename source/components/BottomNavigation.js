@@ -94,7 +94,7 @@ const BottomNavigation = () => {
                             return (
                                 <View style={{alignItems: "center", justifyContent: "center"}}> 
                                     <Entypo name="home" size={24} color={focused ? "#00A86B": "#484C52"} />
-                                    <Text style={{fontSize: 12, color: focused ? "#00A86B": "#484C52"}}>HOME</Text>
+                                    <Text style={{fontSize: 12, color: focused ? "#00A86B": "#484C52"}}>Home</Text>
                                 </View>
                             )
                         }

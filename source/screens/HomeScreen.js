@@ -11,7 +11,7 @@ const HomeScreen = ({navigation}) => {
     <ScrollView className="px-3.5 bg-white h-full">
       
       <Greeting />
-      <WalletCard />
+      <WalletCard navigation={navigation} />
       <QuickActions navigation={navigation} />
       <GettingStartedCard navigation={navigation} />
       <Promotions/>

@@ -36,7 +36,7 @@ const Feedback = ({ navigation }) => {
                 <TouchableOpacity onPress={() => navigation.goBack()} style={{ position: 'absolute', left: 20 }}>
                     <Ionicons name="arrow-back" size={30} color="black" />
                 </TouchableOpacity>
-                <Text style={{ color:'white', fontWeight: '600', fontSize:20 }}>Feedback</Text>
+                <Text style={{ color:'white', fontWeight: 600, fontSize:20 }}>Feedback</Text>
             </View>
             <View className="px-4 py-6">
                 <View className="bg-gray-100 rounded-md p-2 mb-6">

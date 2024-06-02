@@ -14,9 +14,6 @@ import { userContext } from "../contexts/UserProvider";
 import Main from "./Main";
 import SignUpScreen from "./SignUpScreen";
 import LoginScreen from "./LoginScreen";
-import AIScreen from "./AIScreen";
-import ChatbotScreen from "./ChatbotScreen";
-import { Use } from "react-native-svg";
 
 const Stack = createNativeStackNavigator();
 export default function InsideScreen({ route, navigation }) {

@@ -257,10 +257,9 @@ const ChatbotScreen = ({ navigation }) => {
       const renderSend = props => (
         <Send {...props}>
             <View style={{
-                marginRight: 10,
                 backgroundColor: '#2AB784',
                 width: 50,
-                height: 50,
+                aspectRatio: 1,
                 borderRadius: 25,
                 justifyContent: 'center',
                 alignItems: 'center'

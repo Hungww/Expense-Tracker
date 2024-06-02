@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { View, TextInput, Button, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { View, TextInput, Button, Text, ScrollView, TouchableOpacity, Image, Platform } from 'react-native';
 import { GiftedChat, Bubble, Composer,InputToolbar ,Send, Message, Time  } from 'react-native-gifted-chat';
 //paper-plane
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
@@ -149,8 +149,9 @@ const ChatbotScreen = ({ navigation }) => {
       // }, 3000);
     
     };
+    const isIos = Platform.OS === 'ios' ? { transform: [{ scaleY: -1}, {scaleX: 1 }] } : { transform: [{ scaleY: -1}, {scaleX: -1 }] };
     const renderChatEmpty = () => (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center',transform: [{ scaleY: -1 },{ scaleX: -1 }]}}>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', ...isIos }}>
             <Text style={{ fontSize: 18, marginBottom: 20, fontWeight: 500 }}>How can I help you my friend? 😊</Text>
             <TouchableOpacity 
               style={{
@@ -228,19 +229,15 @@ const ChatbotScreen = ({ navigation }) => {
             placeholder:"Ask me anything...",
             placeholderTextColor: '#323130',
             style: {
-                paddingHorizontal: 20,
-                marginTop: 16,
-                marginBottom: 20,
-                marginLeft: 15,
-                marginRight: 10,
-                width: 270,
-                borderRadius: 25,
-                borderWidth: 1,
-                borderColor: 'rgba(0, 0, 0, 0.28)',
-                padding: 10,
-                color: 'black',
-                backgroundColor: '#CFFAEA',
-              },
+              paddingHorizontal: 20,
+              width: '80%',
+              borderRadius: 25,
+              borderWidth: 1,
+              borderColor: 'rgba(0, 0, 0, 0.28)',
+              padding: 10,
+              color: 'black',
+              backgroundColor: '#CFFAEA',
+            },
         }} />
       );
       const renderInputToolbar = props => (
@@ -248,6 +245,10 @@ const ChatbotScreen = ({ navigation }) => {
         {...props}
         containerStyle={{
         backgroundColor: '#CFFAEA',
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingVertical: 15,
+        paddingHorizontal: 10,
         }}
             primaryStyle={{ alignItems: 'center' }}
         />
@@ -288,7 +289,7 @@ const ChatbotScreen = ({ navigation }) => {
       };
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, justifyContent: "space-between" }}>
         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: 15, backgroundColor:'#00A86B' }}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Ionicons name="arrow-back" size={30} color="black" />

@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const WalletCard = () => {
+const WalletCard = ({navigation}) => {
   return (
     <View style={{padding: 10, marginLeft: 5 }}>
         <View style={{ backgroundColor: '#B18AFF', borderRadius: 15}}>
@@ -16,7 +16,7 @@ const WalletCard = () => {
                 </View>
             </View>
             <View style={{ height: 1, width: '100%', backgroundColor: 'rgba(255, 255, 255, 0.45)', marginVertical: 20 }}/>
-            <TouchableOpacity className="flex-row items-center justify-between">
+            <TouchableOpacity className="flex-row items-center justify-between"  onPress={() => navigation.navigate('WalletList')}>
                 <Text style={{ fontSize: 14, color: 'white' }}>Wallet Balance: <Text style={{ fontWeight: 'bold' }}>$9200</Text></Text>
                 <Icon name="chevron-right" size={16} color="white" />
             </TouchableOpacity>

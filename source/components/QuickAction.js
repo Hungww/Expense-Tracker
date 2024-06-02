@@ -7,7 +7,7 @@ const QuickActions = ({navigation}) => {
     { icon: 'robot', label: 'Ai', route: 'Chatbot' },
     { icon: 'diamond-stone', label: 'Upgrade' , route: 'Subscription' },
     { icon: 'note-edit-outline', label: 'FeedBack' , route: 'Feedback' },
-    { icon: 'dots-horizontal', label: 'More' , route: 'Chatbot' },
+    { icon: 'dots-horizontal', label: 'More' , route: 'Profile' },
   ];
 
   return (

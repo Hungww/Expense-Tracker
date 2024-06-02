@@ -11,6 +11,7 @@ import ProfileScreen from "../screens/AccountScreen";
 import ChatbotScreen from "../screens/ChatbotScreen";
 import Feedback from "../components/FeedBack";
 import Subscription from "../components/Subscription";
+import WalletList from "../components/WalletList";
 import AddTransactionModal from "../components/AddTransactionModal";
 import IconHeading from "./IconHeading";
 
@@ -37,7 +38,7 @@ const screenOptions = {
 
 
 const HomeStack = ({ navigation, route }) => {
-  const tabHiddenRoutes = ["Chatbot", "Feedback", "Subscription"];
+  const tabHiddenRoutes = ["Chatbot", "Feedback", "Subscription", "WalletList"];
   React.useLayoutEffect(() => {
     if (tabHiddenRoutes.includes(getFocusedRouteNameFromRoute(route))){
       navigation.setOptions({tabBarStyle: {display: 'none'}});
@@ -72,6 +73,13 @@ const HomeStack = ({ navigation, route }) => {
       options={{
         headerShown: false
       }}/>
+      <Stack.Screen
+        name="WalletList"
+        component={WalletList}
+        options={{
+            headerShown: false
+            }}
+        />
     </Stack.Navigator>
   );
 };
@@ -94,7 +102,7 @@ const BottomNavigation = () => {
                             return (
                                 <View style={{alignItems: "center", justifyContent: "center"}}> 
                                     <Entypo name="home" size={24} color={focused ? "#00A86B": "#484C52"} />
-                                    <Text style={{fontSize: 12, color: focused ? "#00A86B": "#484C52"}}>HOME</Text>
+                                    <Text style={{fontSize: 12, color: focused ? "#00A86B": "#484C52"}}>Home</Text>
                                 </View>
                             )
                         }

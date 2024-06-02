@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Checkbox from 'expo-checkbox';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-
+import User from '../utils/network';
 import { useState } from "react";
 import { db, auth } from '../utils/firebasecfg';
 import Feather from 'react-native-vector-icons/Feather';
@@ -219,6 +219,8 @@ export default function SignUpScreen({navigation}) {
       // Signed up 
       const user = userCredential.user;
       console.log("User signed up successfully")
+      User.createUser(user.uid, user.email, name);
+      
       
       
       // ...

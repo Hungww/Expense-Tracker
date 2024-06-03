@@ -1,6 +1,6 @@
-# ExpenseTracker App
+# Mooney
 
-ExpenseTracker, exactly as it name, an expense tracker app  for dealing with your budget management process.
+Mooney is an expense tracker app  for dealing with your budget management process.
 
 Behance: https://www.behance.net/gallery/195433669/Mooney
 

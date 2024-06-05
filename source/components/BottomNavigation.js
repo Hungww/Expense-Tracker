@@ -7,11 +7,12 @@ import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import HomeScreen from "../screens/HomeScreen";
 import TransactionScreen from "../screens/TransactionScreen";
 import ForumScreen from "../screens/ForumScreen";
-import ProfileScreen from "../screens/AccountScreen";
+import AccountScreen from "../screens/AccountScreen";
 import ChatbotScreen from "../screens/ChatbotScreen";
 import Feedback from "../components/FeedBack";
 import Subscription from "../components/Subscription";
 import WalletList from "../components/WalletList";
+import Profile from "./Profile";
 import AddTransactionModal from "../components/AddTransactionModal";
 import IconHeading from "./IconHeading";
 
@@ -54,6 +55,11 @@ const HomeStack = ({ navigation, route }) => {
         header: ()=> <IconHeading />,
       }}
       />
+      <Stack.Screen name="Profile" component={Profile}
+        options={{
+            headerShown: false
+        }}
+        />
       <Stack.Screen 
       name="Chatbot"
       component={ChatbotScreen} 
@@ -169,15 +175,15 @@ const BottomNavigation = () => {
                 />
 
                 <Tab.Screen 
-                    name="Profile" 
-                    component={ProfileScreen} 
+                    name="Account" 
+                    component={AccountScreen} 
                     options={{
                         header: ()=> <IconHeading />,
                         tabBarIcon: ({focused})=>{
                             return (
                                 <View style={{alignItems: "center", justifyContent: "center"}}> 
                                     <FontAwesome name="user" size={24} color={focused ? "#00A86B": "#484C52"} />
-                                    <Text style={{fontSize: 12, color: focused ? "#00A86B": "#484C52"}}>Profile</Text>
+                                    <Text style={{fontSize: 12, color: focused ? "#00A86B": "#484C52"}}>Account</Text>
                                 </View>
                             )
                         }

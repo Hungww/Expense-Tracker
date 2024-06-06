@@ -6,13 +6,26 @@ import {
   Platform,
   SafeAreaView,
   TouchableOpacity,
+  TextInput,
+  Button,
+  Image,
+  ScrollView,
 } from "react-native";
-
+import { useWindowDimensions } from "react-native";
 import StepIndicator from "react-native-step-indicator";
 import { AntDesign } from "@expo/vector-icons";
+import * as ImagePicker from "expo-image-picker";
 import { MaterialIcons } from "@expo/vector-icons";
+import { userContext } from "../contexts/UserProvider";
 import React from "react";
-import { RichText, Toolbar, useEditorBridge,useEditorContent } from "@10play/tentap-editor";
+import { Post } from "../utils/network";
+import {
+  RichText,
+  Toolbar,
+  useEditorBridge,
+  useEditorContent,
+} from "@10play/tentap-editor";
+import RenderHtml from "react-native-render-html";
 
 const PAGES = ["Page 1", "Page 2", "Page 3"];
 
@@ -37,6 +50,9 @@ const firstIndicatorStyles = {
 };
 
 const CreatePostScreen = ({ navigation }) => {
+  const User = React.useContext(userContext);
+
+
   const [currentPage, setCurrentPage] = React.useState(0);
   const [leftColor, setLeftColor] = React.useState("#808080");
   const [leftDisable, setLeftDisable] = React.useState(true);
@@ -44,64 +60,79 @@ const CreatePostScreen = ({ navigation }) => {
   const [rightDisable, setRightDisable] = React.useState(false);
 
   const [content, setContent] = React.useState("");
-
+  const [image, setImage] = React.useState(null);
+  const [image_base64, setImage_base64] = React.useState(null);
+  const [image_type, setImage_type] = React.useState(null);
+  const [tittle, setTittle] = React.useState("");
+  const [description, setDescription] = React.useState("");
+  const { width } = useWindowDimensions();
   const editor = useEditorBridge({
     autofocus: true,
     avoidIosKeyboard: true,
     initialContent,
   });
-  
+
   const initialContent = "";
-  function setButton(cur){
+
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [16, 9],
+      quality: 1,
+      base64: true,
+    });
+
+    console.log(result);
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+      setImage_base64(result.assets[0].base64);
+      setImage_type(result.assets[0].mimeType);
+    }
+  };
+  function setButton(cur) {
     if (cur === 0) {
       setLeftColor("#808080");
       setLeftDisable(true);
       setRightColor("#19B079");
       setRightDisable(false);
+    } else if (cur === 1) {
+      setLeftColor("#808080");
+      setLeftDisable(true);
+      setRightColor("#19B079");
+      setRightDisable(false);
+    } else if (cur === 2) {
+      setLeftColor("#19B079");
+      setLeftDisable(false);
+      setRightColor("#808080");
+      setRightDisable(true);
     }
-    else if (cur === 1) {
-        setLeftColor("#19B079");
-        setLeftDisable(false);
-        setRightColor("#19B079");
-        setRightDisable(false);
-        }
-    else if (cur === 2) {
-            setLeftColor("#19B079");
-            setLeftDisable(false);
-            setRightColor("#808080");
-            setRightDisable(true);
-            }
   }
   function onPressLeft() {
     if (currentPage > 0) {
-        setButton(currentPage-1);
+      setButton(currentPage - 1);
 
-
-      setCurrentPage( prev => prev - 1)
+      setCurrentPage((prev) => prev - 1);
       console.log(content);
     }
-
-
-
   }
   async function onPressRight() {
-    if (currentPage < 2) {    
-        if (currentPage === 0){
-            editor.setContent("<p>This is a basic example!</p>");
-            newcont = await editor.getHTML();
-            setContent(newcont);
-          
-        }
-        
-      setButton(currentPage+1);  
-        setCurrentPage( prev => prev + 1)
+    if (currentPage < 2) {
+      if (currentPage === 0) {
+        const newcont = await editor.getHTML();
+        setContent(newcont);
 
+        //reset the editor
+        editor.setContent("");
+      }
+
+      setButton(currentPage + 1);
+      setCurrentPage((prev) => prev + 1);
 
       console.log(content);
-
-
     }
-
   }
   const onStepPress = (position) => {
     setCurrentPage(position);
@@ -121,13 +152,121 @@ const CreatePostScreen = ({ navigation }) => {
     );
   };
 
+  async function onSubmit() {
+    const createdDate = new Date().toISOString();
+    console.log(createdDate)
+    const data = {
+      owner: User.user_info,
+      tittle: tittle,
+      description: description,
+      content: content,
+      image: image_base64,
+      image_type: image_type,
+      createdDate: createdDate,
+    };
+    console.log(data.owner);
+    await Post.createPost(data);
+    navigation.navigate("Main");
+    
+  }
+  const renderTab = (index) => {
+    switch (index) {
+      case 0:
+        return <View></View>;
+      case 1:
+        return (
+          <View className="flex flex-col justify-center items-center">
+            <View>
+              <Text className=" font-medium text-[16px]  mb-1">Tittle</Text>
+              <View
+                className={
+                  "flex-row items-center justify-center w-80  bg-white pr-2 rounded-xl border "
+                }
+              >
+                <TextInput
+                  onChangeText={(text) => setTittle(text)}
+                  value={tittle}
+                  placeholder="ex: A new way to manage your money..."
+                  style={styles.input}
+                />
+              </View>
+            </View>
+
+            <View className="pt-4">
+              <Text className=" font-medium text-[16px]  mb-1">Summary</Text>
+              <View
+                className={
+                  "flex-row items-center justify-center w-80  bg-white pr-2 rounded-xl border "
+                }
+              >
+                <TextInput
+                  onChangeText={(text) => setDescription(text)}
+                  value={description}
+                  placeholder="ex: Mooney provides a new way to manage your money,you can track your expenses and income easily"
+                  style={styles.input_multilines}
+                  multiline={true}
+                />
+              </View>
+            </View>
+
+            <View className="pt-4 w-80">
+              <View className="w-[100%] ">
+                <Text className=" font-medium text-[16px]  mb-1">
+                  Cover Image
+                </Text>
+              </View>
+
+              <Button
+                title="Pick an image from camera roll"
+                onPress={pickImage}
+              />
+              {image && (
+                <Image source={{ uri: image }} className="w-80 h-[200]" />
+              )}
+            </View>
+          </View>
+        );
+      case 2:
+        return (
+          <ScrollView className="mx-4">
+            <Text className=" font-medium text-[32px]  mb-1">{tittle}</Text>
+            <Text className="  text-[16px] text-gray-500  mb-1">
+              {description}
+            </Text>
+            <View className="flex flex-row justify-center w-[100%] ">
+              {image && (
+                <Image
+                  source={{ uri: image }}
+                  className="w-[98%] h-[200] rounded-md"
+                />
+              )}
+            </View>
+
+            <Text>
+              <RenderHtml contentWidth={width} source={{ html: content }} />
+            </Text>
+
+            <TouchableOpacity className="w-[100%] flex flex-row justify-center"
+              onPress={onSubmit}
+            >
+              <View className="flex flex-row justify-center items-center w-[80%] bg-primary rounded-md py-4 my-4">
+                <Text className="text-white font-medium text-[16px]">
+                  Publish
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </ScrollView>
+        );
+    }
+  };
+
   return (
     <SafeAreaView className="flex-1 bg-white  ">
       <View style={styles.stepIndicator}>
         <StepIndicator
           customStyles={firstIndicatorStyles}
           currentPosition={currentPage}
-          labels={["Create ", "Profile", "Band"]}
+          labels={["Create content", "Add option", "Review your post"]}
           renderLabel={renderLabel}
           onPress={onStepPress}
           stepCount={3}
@@ -150,8 +289,9 @@ const CreatePostScreen = ({ navigation }) => {
           <MaterialIcons name="navigate-next" size={40} color={rightColor} />
         </TouchableOpacity>
       </View>
-      {currentPage === 1 && <RichText editor={editor} />}
-      {currentPage === 1 && (
+
+      {currentPage === 0 && <RichText editor={editor} />}
+      {currentPage === 0 && (
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           style={exampleStyles.keyboardAvoidingView}
@@ -159,6 +299,7 @@ const CreatePostScreen = ({ navigation }) => {
           <Toolbar editor={editor} />
         </KeyboardAvoidingView>
       )}
+      {renderTab(currentPage)}
     </SafeAreaView>
   );
 };
@@ -188,6 +329,32 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "500",
     color: "#4aae4f",
+  },
+  input: {
+    flex: 1,
+    height: 40,
+    backgroundColor: "white",
+    borderRadius: 16,
+    paddingHorizontal: 20,
+    //marginHorizontal: 2,
+    marginVertical: 3,
+  },
+  input_container: {
+    width: "90%",
+    marginVertical: 8,
+  },
+  input_multilines: {
+    flex: 1,
+    height: 80,
+    backgroundColor: "white",
+    borderRadius: 16,
+    paddingHorizontal: 20,
+    //marginHorizontal: 2,
+    marginVertical: 3,
+  },
+  image: {
+    width: 350,
+    height: 200,
   },
 });
 

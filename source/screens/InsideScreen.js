@@ -15,6 +15,8 @@ import Main from "./Main";
 import SignUpScreen from "./SignUpScreen";
 import LoginScreen from "./LoginScreen";
 import CreatePostScreen from "./CreatePostScreen";
+import ViewPostScreen from "./ViewPostScreen";
+import IconHeading from "../components/IconHeading";
 
 const Stack = createNativeStackNavigator();
 export default function InsideScreen({ route, navigation }) {
@@ -56,6 +58,13 @@ export default function InsideScreen({ route, navigation }) {
         <Stack.Screen name={ScreenName} component={ScreenComponent} />
       )}
       <Stack.Screen name="CreatePostScreen" component={CreatePostScreen} />
+      <Stack.Screen name="ViewPostScreen" component={ViewPostScreen}
+      options={{
+        header: ()=> <IconHeading />,
+        headerShown: true
+      }}
+      
+      />
     </Stack.Navigator>
   );
 }

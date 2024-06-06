@@ -23,7 +23,7 @@ const Post = {
     console.log("Creating Post");
     try {
       const response = await axios.post(
-        "http://192.168.0.105:3000/api/v1/post/create_post",
+        "http://expense-tracker-server-xi.vercel.app/api/v1/post/create_post",
         data
       );
       return response.data;
@@ -35,7 +35,7 @@ const Post = {
     console.log("Getting All Posts");
     try {
       const response = await axios.get(
-        "http://192.168.0.105:3000/api/v1/post/get_posts"
+        "http://expense-tracker-server-xi.vercel.app/api/v1/post/get_posts"
       );
       return response.data;
     } catch (error) {

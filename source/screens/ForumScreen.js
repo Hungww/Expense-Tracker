@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   RefreshControl,
 } from "react-native";
-import { userContext } from '../contexts/UserProvider';
+import { userContext } from "../contexts/UserProvider";
 
 import { FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -28,7 +28,7 @@ const ForumScreen = ({ navigation }) => {
         avatar: require("../../assets/user.png"),
       },
 
-      createdAt: "2021-09-04T12:00:00Z",
+      createdDate: "2021-09-04T12:00:00Z",
       content:
         "This is some description for the post, or just the conclusion, intro,.... etc.",
       title:
@@ -44,7 +44,9 @@ const ForumScreen = ({ navigation }) => {
       <View className="flex flex-row justify-between w-[100%] ">
         <View className="flex flex-row items-center  ">
           <Image
-            source={{ uri:`https://ui-avatars.com/api/?name=${item.owner.name}&background=random&size=56` }}
+            source={{
+              uri: `https://ui-avatars.com/api/?name=${item.owner.name}&background=random&size=56`,
+            }}
             style={{ width: 45, height: 45, borderRadius: 50 }}
           ></Image>
           <View className="flex flex-col ml-2 mt-3">
@@ -65,8 +67,9 @@ const ForumScreen = ({ navigation }) => {
         </View>
       </View>
 
-      <TouchableOpacity className="flex flex-col w-[100%] "
-      onPress={() => navigation.navigate("ViewPostScreen", { post: item })}
+      <TouchableOpacity
+        className="flex flex-col w-[100%] "
+        onPress={() => navigation.navigate("ViewPostScreen", { post: item })}
       >
         <Text className="text-xl font-semibold ">{item.title}</Text>
         <Text className="text-base text-[#868686]">{item.description}</Text>
@@ -74,7 +77,6 @@ const ForumScreen = ({ navigation }) => {
           <Image
             source={{
               uri: item.image,
-
             }}
             className="w-[100%] h-[200] mt-2 rounded-2xl"
           ></Image>
@@ -86,15 +88,21 @@ const ForumScreen = ({ navigation }) => {
   async function fecthPostData() {
     try {
       const ListPosts = await Post.getAll();
-   
-      ListPosts.sort(function(a, b) {
-        return (a.createdDate < b.createdDate) ? 1 : ((a.createdDate > b.createdDate) ? -1 : 0);
-    });
 
-    for (let i = 0; i < ListPosts.length; i++) {
-      ListPosts[i].createdDate = new Date(ListPosts[i].createdDate).toLocaleString();
-    }
-  
+      ListPosts.sort(function (a, b) {
+        return a.createdDate < b.createdDate
+          ? 1
+          : a.createdDate > b.createdDate
+          ? -1
+          : 0;
+      });
+
+      for (let i = 0; i < ListPosts.length; i++) {
+        ListPosts[i].createdDate = new Date(
+          ListPosts[i].createdDate
+        ).toLocaleString();
+      }
+
       setPosts(ListPosts);
       // //sort posts by time
       // posts.sort((a, b) => b.Time.getTime() - a.Time.getTime());
@@ -121,7 +129,7 @@ const ForumScreen = ({ navigation }) => {
     <SafeAreaView className="flex flex-col h-screen items-center w-[100%] bg-white">
       <View className="flex flex-col flex-1 mb-[60] items-center -mt-4">
         <FlatList
-        className=" mb-12"
+          className=" mb-12"
           data={posts}
           renderItem={({ item }) => <Item item={item} />}
           keyExtractor={(item) => item.createdDate}
@@ -129,7 +137,6 @@ const ForumScreen = ({ navigation }) => {
             width: "100%",
             alignItems: "center",
             paddingBottom: 20,
-            
           }}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />

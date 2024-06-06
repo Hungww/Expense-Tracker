@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   RefreshControl,
+  ActivityIndicator
 } from "react-native";
 import { userContext } from "../contexts/UserProvider";
 
@@ -15,11 +16,13 @@ import { Entypo } from "@expo/vector-icons";
 const avatar = require("../../assets/user.png");
 import { useEffect } from "react";
 import { Post } from "../utils/network";
+import { useIsFocused } from '@react-navigation/native'
 const ForumScreen = ({ navigation }) => {
   const [refreshing, setRefreshing] = React.useState(false);
   const [refresh, setRefresh] = React.useState(0);
   const [loading, setLoading] = React.useState(false);
   const avatar = require("../../assets/user.png");
+  const isFocused = useIsFocused();
   const [posts, setPosts] = React.useState([
     {
       id: "1",
@@ -85,8 +88,46 @@ const ForumScreen = ({ navigation }) => {
     </View>
   );
 
+  function processTime(ISOtime) {
+    let date = new Date(ISOtime);
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let day = date.getDate();
+    let month = date.getMonth();
+    let year = date.getFullYear();
+
+    console.log("Date:", date);
+
+
+    let curDate= new Date();
+    let curHours = curDate.getHours();
+    let curMinutes = curDate.getMinutes();
+    let curDay = curDate.getDate();
+    let curMonth = curDate.getMonth();
+    let curYear = curDate.getFullYear();
+
+    console.log("CurDate:", curDate);
+
+    if (year === curYear && month === curMonth && day === curDay) {
+      if (hours === curHours) {
+        if (minutes === curMinutes) {
+          return("Just now");
+        } else {
+          return(curMinutes - minutes + " minutes ago");
+        }
+      } else {
+        return(curHours - hours + " hours ago");
+      }
+    } else {
+      return(curDay - day + " days ago");
+    }
+
+
+  }
   async function fecthPostData() {
     try {
+      setLoading(true);
+      setPosts([]);
       const ListPosts = await Post.getAll();
 
       ListPosts.sort(function (a, b) {
@@ -96,12 +137,11 @@ const ForumScreen = ({ navigation }) => {
           ? -1
           : 0;
       });
-
+      processTime(ListPosts[0].createdDate);
       for (let i = 0; i < ListPosts.length; i++) {
-        ListPosts[i].createdDate = new Date(
-          ListPosts[i].createdDate
-        ).toLocaleString();
+        ListPosts[i].createdDate = processTime(ListPosts[i].createdDate);
       }
+  
 
       setPosts(ListPosts);
       // //sort posts by time
@@ -121,9 +161,11 @@ const ForumScreen = ({ navigation }) => {
   }, []);
   useEffect(() => {
     fecthPostData();
-  }, []);
+  }, [isFocused]);
   if (loading) {
-    return <Text>Loading...</Text>;
+    return <View className="flex flex-row justify-center items-center h-[100%]">
+      <ActivityIndicator size="large" color="#19B079" />
+    </View>
   }
   return (
     <SafeAreaView className="flex flex-col h-screen items-center w-[100%] bg-white">
@@ -132,7 +174,7 @@ const ForumScreen = ({ navigation }) => {
           className=" mb-12"
           data={posts}
           renderItem={({ item }) => <Item item={item} />}
-          keyExtractor={(item) => item.createdDate}
+          keyExtractor={(item) => item.description}
           contentContainerStyle={{
             width: "100%",
             alignItems: "center",

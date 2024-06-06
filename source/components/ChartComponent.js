@@ -7,6 +7,8 @@ import HeatMap from "./HeatMap.js";
 
 const { width, height } = Dimensions.get('window');
 
+const colors = ["#BE95FF", "#78A9FF", "#FD6F7A", "#FCDDA1", "#4CC297", "#33FFBD", "#5733FF", "#BD33FF", "#FF33DB"];
+
 const chartConfig = {
     backgroundGradientTo: "white",
     backgroundGradientFromOpacity: 0,
@@ -17,60 +19,68 @@ const chartConfig = {
     barRadius : 5, 
 };
 
-const HeatMapData = [
-    { date: "2017-01-02", value: 10 },
-    { date: "2017-01-03", value: 20 },
-    { date: "2017-01-04", value: 30 },
-    { date: "2017-01-05", value: 40 },
-    { date: "2017-01-06", value: 50 },
-    { date: "2017-01-30", value: 20 },
-    { date: "2017-01-31", value: 30 },
-    { date: "2017-02-30", value: 40 },
-    { date: "2017-03-01", value: 20 },
-    { date: "2017-03-05", value: 20 },
-    { date: "2017-04-02", value: 40 },
-    { date: "2017-05-06", value: 50 },
-];
+const ChartComponent = (data) => {
+    data = data.data
+    console.log(data)
+    let categorySum = {};
 
-const BarData = {
-    labels: ["Mon", "Tues", "Wed", "Thur", "Fri", "Sat","Sun"],
-            datasets: [
-                {
-                    data: [40, 84, 56, -40, 60, -55, 40],
-                    colors: [
-                        (opacity = 1) => `#BE95FF`,
-                        (opacity = 1) => `#78A9FF`,
-                        (opacity = 1) => `#78A9FF`,
-                        (opacity = 1) => `#BE95FF`,
-                        (opacity = 1) => `#78A9FF`,
-                        (opacity = 1) => `#BE95FF`,
-                        (opacity = 1) => `#78A9FF`,
-                        (opacity = 1) => `#BE95FF`,
-                        (opacity = 1) => `#78A9FF`,
-                    ]
-                } 
-            ]
-}
-
-const Piedata = [
-    {
-        name: "Subscriptions",
-        population: 2150000,
-        color: "#4CC297",
-    },
-    {
-        name: "Shopping",
-        population: 1800000,
-        color: "#FCDDA1",
-    },
-    {
-        name: "Food",
-        population: 1527612,
-        color: "#FD6F7A",
+    if (data) {
+        for (let i = 0; i < data.length; i++) {
+            if (!data[i].isExpense) continue;
+            if (categorySum[data[i].category]) {
+                categorySum[data[i].category] += parseFloat(data[i].value);;
+            } else {
+                categorySum[data[i].category] = parseFloat(data[i].value);;
+            }
+        }
     }
-];
 
-const ChartComponent = () => {
+    let Piedata = [];
+    let BarData = new Array(7).fill(0);
+    if(data) {
+        data.forEach((transaction) => {
+            let date = new Date(transaction.date);
+            let dayOfWeek = date.getUTCDay();
+            BarData[dayOfWeek] += transaction.isExpense ? -parseFloat(transaction.value) : parseFloat(transaction.value);
+        })
+    }
+    for (let key in categorySum) {
+        Piedata.push({
+            name: key,
+            population: categorySum[key],
+            color: colors[Math.floor(Math.random() * colors.length)]
+        });
+    }
+
+    const BarDataConfig = {
+        labels: ["Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat"],
+                datasets: [
+                    {
+                        data: BarData,
+                        colors: [
+                            (opacity = 1) => `#BE95FF`,
+                            (opacity = 1) => `#78A9FF`,
+                            (opacity = 1) => `#78A9FF`,
+                            (opacity = 1) => `#BE95FF`,
+                            (opacity = 1) => `#78A9FF`,
+                            (opacity = 1) => `#BE95FF`,
+                            (opacity = 1) => `#78A9FF`,
+                            (opacity = 1) => `#BE95FF`,
+                            (opacity = 1) => `#78A9FF`,
+                        ]
+                    } 
+                ]
+    }
+
+    let HeatMapData = [];
+    if(data) {
+        data.forEach((transaction) => {
+            let date = new Date(transaction.date);
+            let formattedDate = date.toISOString().split('T')[0];
+            HeatMapData.push({date: formattedDate, value: transaction.isExpense ? -parseFloat(transaction.value) : parseFloat(transaction.value)});
+        })
+    }
+
     return (
         <>
             <ViewSlider 
@@ -80,7 +90,7 @@ const ChartComponent = () => {
                             <PieChartComponent data={Piedata} chartConfig={chartConfig}/>
                         </View>
                         <View style={styles.viewBox}>
-                            <BarChartComponent data={BarData} chartConfig={chartConfig}/>
+                            <BarChartComponent data={BarDataConfig} chartConfig={chartConfig}/>
                         </View>
                         <View style={styles.viewBox}>
                             <HeatMap data={HeatMapData} chartConfig={chartConfig}/>

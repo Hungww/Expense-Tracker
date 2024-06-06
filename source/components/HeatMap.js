@@ -8,7 +8,7 @@ const HeatMapComponent = ({ data, chartConfig }) => {
     return (
         <ContributionGraph
             values={data}
-            endDate={new Date("2017-05-01")}
+            endDate={new Date()}
             numDays={105}
             width={screenWidth}
             height={220}

@@ -7,11 +7,28 @@ import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry';
     export const UserProvider = ({ children }) => {
         const [user_info, setUser_info] = useState(null);
         const [user_uid, setUser_uid] = useState("");
+        const [user_transactions, setUser_transactions] = useState(null);
 
         const logout = () => {
           setUser_uid("");
           setUser_info(null);
         };
+
+        const get_transactions = async () => {
+          try {
+              const response = await axios.get(`https://expense-tracker-server-xi.vercel.app/api/v1/transactions/get_transactions/${user_uid}`);
+              response.data.sort(function (a, b) {
+                  return a.date < b.date
+                      ? 1
+                      : a.date > b.date
+                      ? -1
+                      : 0;
+              });
+              setUser_transactions(response.data);
+          } catch (error) {
+              console.error('Error:', error);
+          }
+      };
 
         async function getUserInfo(retries = 10, interval = 500) {
             try {
@@ -39,7 +56,9 @@ import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry';
             setUser_uid: setUser_uid,
             user_info: user_info,
             getUserInfo: getUserInfo,
-            logout: logout
+            logout: logout,
+            user_transactions: user_transactions,
+            get_transactions: get_transactions
         }
         return (
             <userContext.Provider value={User}>

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import Modal from 'react-native-modal';
 import ModalDropdown from './ModalDropdown';
 import CatergoryContainer from './CatergoryContainer';
@@ -21,6 +21,8 @@ import {
     Pressable
 } from 'react-native';
 import AddCategoryModal from './AddCategoryModal';
+import { userContext } from "../contexts/UserProvider";
+import axios from 'axios';
 
 const AddTransactionModal = ( {isVisible, onClose} ) => {
     const [typeValue, setTypeValue] = useState("expense");
@@ -34,6 +36,30 @@ const AddTransactionModal = ( {isVisible, onClose} ) => {
     const [showPicker, setShowPicker] = useState(false);
 
     const [showAddCategory, setShowAddCategory] = useState(false);
+
+    const {user_uid, get_transactions} = useContext(userContext);
+    const handleSubmit = async () => {
+        const data = {
+            title: title,
+            value: value,
+            description: description.toString(),
+            date: date.toISOString(),
+            category: category,
+            isExpense: typeValue == "expense" ? true : false,
+            user: user_uid
+        };
+
+        console.log(data);
+
+        try {
+            const response = await axios.post("https://expense-tracker-server-xi.vercel.app/api/v1/transactions/create_transaction", data);
+            console.log(response.data);
+            get_transactions();
+        } catch (error) {
+            console.error('Error:', error);
+        }
+        
+    }
 
     const togglePicker = () => {
         setShowPicker(!showPicker);
@@ -151,7 +177,7 @@ const AddTransactionModal = ( {isVisible, onClose} ) => {
                                         <TextInput 
                                             className="px-4 py-2.5 border border-black rounded-md h-20" 
                                             value={description}
-                                            onChange={(text) => setDescription(text)}
+                                            onChangeText={(text) => {setDescription(text)}}
                                             multiline={true}
                                             scrollEnabled={true}
                                             placeholder='Write your description here'
@@ -178,7 +204,7 @@ const AddTransactionModal = ( {isVisible, onClose} ) => {
                                     <TouchableOpacity className="bg-[#FF8080] py-3 rounded-lg mt-5 w-[45%]" onPress={() => onClose(false)}>
                                         <Text className="text-white text-lg font-medium text-center">Close</Text>
                                     </TouchableOpacity>
-                                    <TouchableOpacity className="bg-[#19B079] py-3 rounded-lg mt-5 w-[45%]">
+                                    <TouchableOpacity className="bg-[#19B079] py-3 rounded-lg mt-5 w-[45%]" onPress={handleSubmit}>
                                         <Text className="text-white text-lg font-medium text-center">Submit</Text>
                                     </TouchableOpacity>
                                 </View>

@@ -19,12 +19,12 @@ var userCategory = [
         name: "file-text-o"
     },
     {
-        title: "ABC",
+        title: "Restaurant",
         color: "#fd3c4a",
         name: "spoon"
     }, 
     {
-        title: "XYZ",
+        title: "Others",
         color: "#FCAC12",
         name: "shopping-bag",
     },

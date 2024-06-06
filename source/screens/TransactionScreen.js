@@ -30,7 +30,7 @@ const TransactionScreen = ()  => {
                 <Text className="font-roboto-bold text-[#828282] text-lg">Total Spending</Text>
                 <Text className="font-roboto-medium text-2xl">${totalSpending}</Text>
             </View>
-            <ChartComponent />
+            <ChartComponent data={user_transactions} />
             <View className="flex-row items-center justify-between">
                 <Text className="text-black text-xl font-semibold">Recent Transaction</Text>
                 <TouchableOpacity className="px-3 py-2 bg-[#E5F6F0] rounded-2xl" onPress={() => {}}>
